@@ -4,7 +4,7 @@ import classNames from "classnames";
 
 import {connect} from "react-redux";
 
-import {toggleCollapse, setPresent} from "client/actions";
+import {setPresent} from "client/actions";
 
 const RollCall = ({delegates, present, setPresent}) => {
   return <div>

@@ -1,0 +1,43 @@
+@import "colors";
+
+@sidebar-width: 200px;
+
+@transition-duration: 0.5s;
+
+#side-bar{
+  transition-duration: @transition-duration;
+  
+  position: absolute;
+  right: 0;
+  top: 0;
+  
+  width: @sidebar-width;
+  
+  transform: translateX(0);
+  
+  &.collapsed{
+    transform: translateX(@sidebar-width);
+  }
+  
+  background-color: #bdbdbd;
+  box-shadow: 8px 0 25px -3px rgba(0,0,0,0.4) inset;
+  height: 100%;
+}
+#side-bar ul{
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+#side-bar li{
+  cursor: pointer;
+  padding: 15px;
+  padding-left: 35px;
+  
+  transition: 150ms background-color;
+  &.toggled{
+    background-color: @nice-blue;
+  }
+  &:hover{
+    background-color: @hover-nice-blue;
+  }
+}

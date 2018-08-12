@@ -8,8 +8,14 @@ import Header from "./HeaderConnector";
 import Buttons from "./ButtonConnector";
 
 import RollCall from "./components/RollCall";
+import SideBar from "./components/SideBar";
 
-const App = ({collapsed}) => {
+const nameToJSX = {
+  "Roll Call": <RollCall />,
+  "Blah": null
+}
+
+const App = ({collapsed, currSession}) => {
   return <div>
     <div id="main-content" className={
         classNames({
@@ -17,12 +23,22 @@ const App = ({collapsed}) => {
         })
       }>
       <Header />
-      <div id="header-padding" />
+      <div className="header-padding" />
       <div className="centered-parent">
         <div className="centered">
-          <RollCall />
+          {
+            nameToJSX[currSession]
+          }
         </div>
       </div>
+    </div>
+    <div id="side-bar" className={
+        classNames({
+          "collapsed": !collapsed
+        })
+      }>
+      <div className="header-padding" />
+      <SideBar names={Object.keys(nameToJSX)}/>
     </div>
     <Buttons />
   

@@ -14,7 +14,9 @@ const store = createStore(reducer);
  
 const render = () => ReactDOM.render(
   <Provider store={store}>
-    <App collapsed={store.getState().collapsed}/>
+    <App collapsed={store.getState().collapsed}
+      currSession={store.getState().sessionName}
+    />
   </Provider>,
   document.getElementById("app"));
 

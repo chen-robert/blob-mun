@@ -1,9 +1,9 @@
 const initialState = {
-  delegates: ["Bob", "Joe", "Samuel", "Johnson", "Bob", "Joe", "Samuel", "Johnson", "Bob", "Joe", "Samuel", "Johnson", "Bob", "Joe", "Samuel", "Johnson"],
+  delegates: ["Bob", "Joe", "Samuel", "Johns"],
   present: {},
   comitteeName: "Blah",
-  sessionName: "Derp",
-  collapsed: false
+  sessionName: "Roll Call",
+  collapsed: true
   
 };
 initialState.delegates.forEach((name) => {
@@ -20,11 +20,13 @@ const reducer = (state = initialState, action) => {
     case "TOGGLE_COLLAPSE":
       return {...state, collapsed: !state.collapsed};
     case "PRESENT_STATUS":
-    return {...state, 
-      present: {...state.present, 
-        [action.name]: action.status
+      return {...state, 
+        present: {...state.present, 
+          [action.name]: action.status
+        }
       }
-    }
+    case "SET_SESSION":
+      return {...state, sessionName: action.session};
     default:
       return state;
   }
