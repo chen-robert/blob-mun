@@ -7,11 +7,13 @@ import App from "./containers/App.js";
 
 import reducer from "./reducers";
 
+import "./styles/main.less";
+
 const store = createStore(reducer);
  
 const render = () => ReactDOM.render(
   <Provider store={store}>
-    <div>HI</div>
+    <App collapsed={store.getState().collapsed}/>
   </Provider>,
   document.getElementById("app"));
 

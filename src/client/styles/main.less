@@ -1,0 +1,48 @@
+@import url("https://fonts.googleapis.com/css?family=Roboto:300,400,500#.css");
+@import url("https://fonts.googleapis.com/icon?family=Material+Icons#.css");
+
+@header-height: 100px;
+@sidebar-width: 150px;
+
+@transition-duration: 0.5s;
+
+html, body{  
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
+  
+  margin: 0;
+}
+
+#header{
+  width: 100%;
+  height: @header-height;
+  
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+#comittee-name{
+  text-align: center;
+}
+
+#session-name{
+  text-align: center;
+  background-color: blue;
+  color: white;
+}
+
+#main-content{
+  transition-duration: @transition-duration;
+
+  &.collapsed{
+    transform: translateX(calc(-@sidebar-width));
+  }
+}
+
+#sidebar-button{
+  position: absolute;
+  right: 0;
+}
+

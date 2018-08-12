@@ -10,6 +10,8 @@
   "author": "Robert Chen",
   "license": "MIT",
   "dependencies": {
+    "@material-ui/core": "^1.4.2",
+    "less": "^3.8.0",
     "react": "^16.4.2",
     "react-dom": "^16.4.2",
     "react-redux": "^5.0.7",
