@@ -1,10 +1,12 @@
 @import url("https://fonts.googleapis.com/css?family=Roboto:300,400,500#.css");
 @import url("https://fonts.googleapis.com/icon?family=Material+Icons#.css");
 
-@header-height: 100px;
+@header-height: 120px;
 @sidebar-width: 150px;
 
 @transition-duration: 0.5s;
+
+@shaded-blue: #668fd1;
 
 html, body{  
   height: 100%;
@@ -29,8 +31,11 @@ html, body{
 
 #session-name{
   text-align: center;
-  background-color: blue;
+  background-color: @shaded-blue;
   color: white;
+  
+  font-size: 1.5em;
+  padding: 5px;
 }
 
 #main-content{
@@ -44,5 +49,9 @@ html, body{
 #sidebar-button{
   position: absolute;
   right: 0;
+  top: 0;
 }
 
+#header-padding{
+  height: @header-height;
+}

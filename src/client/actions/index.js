@@ -5,6 +5,14 @@ export const addDelegate = (name) => {
   }
 }
 
+export const setPresent = (name, status) => {
+  return {
+    type: "PRESENT_STATUS",
+    name,
+    status    
+  }
+}
+
 export const toggleCollapse = () => {
   return {
     type: "TOGGLE_COLLAPSE"

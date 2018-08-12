@@ -8,6 +8,7 @@ import App from "./containers/App.js";
 import reducer from "./reducers";
 
 import "./styles/main.less";
+import "./styles/session.less";
 
 const store = createStore(reducer);
  
