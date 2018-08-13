@@ -10,6 +10,8 @@ import reducer from "./reducers";
 import "./styles/main.less";
 import "./styles/session.less";
 
+import incrementTimer from "client/actions";
+
 const store = createStore(reducer);
  
 const render = () => ReactDOM.render(

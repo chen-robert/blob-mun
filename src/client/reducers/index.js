@@ -1,16 +1,28 @@
 const initialState = {
   delegates: ["Bob", "Joe", "Samuel", "Johns"],
   present: {},
-  comitteeName: "Blah",
-  sessionName: "Roll Call",
-  collapsed: true
-  
+  comitteeName: "Blob Mun",
+  sessionName: "Motions",
+  collapsed: true,
+  moderated: {
+    timer: 0,
+    speakingTimer: 0,
+    paused: false,
+    speakingTotal: 1 * 60,
+    total: 10 * 60,
+    currentSpeaker: "Bob",
+    topic: "Bleh"
+  }
 };
+for(var i = 0; i < 26; i++){
+  initialState.delegates.push("Bob" + i)
+}
 initialState.delegates.forEach((name) => {
   initialState.present[name] = "PRESENT";
 });
 
 const reducer = (state = initialState, action) => {
+  console.log(action);
   switch (action.type) {
     case "ADD_DELEGATE":
       
@@ -18,7 +30,8 @@ const reducer = (state = initialState, action) => {
         delegates: [...delegates, action.name]
       };
     case "TOGGLE_COLLAPSE":
-      return {...state, collapsed: !state.collapsed};
+      return {...state, 
+      collapsed: action.value !== undefined? action.value: !state.collapsed};
     case "PRESENT_STATUS":
       return {...state, 
         present: {...state.present, 
@@ -27,6 +40,9 @@ const reducer = (state = initialState, action) => {
       }
     case "SET_SESSION":
       return {...state, sessionName: action.session};
+    case "CHANGE_SESS":
+      const newSessData = Object.assign({...state[action.name]}, action.delta);
+      return {...state, [action.name]: newSessData};
     default:
       return state;
   }

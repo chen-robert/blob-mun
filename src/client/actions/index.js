@@ -13,14 +13,23 @@ export const setPresent = (name, status) => {
   }
 }
 
-export const toggleCollapse = () => {
+export const toggleCollapse = (value) => {
   return {
-    type: "TOGGLE_COLLAPSE"
+    type: "TOGGLE_COLLAPSE",
+    value
   }
 }
 export const setSession = (session) => {
   return {
     type: "SET_SESSION",
     session
+  }
+}
+
+export const changeSessionData = (name, delta) => {
+  return {
+    type: "CHANGE_SESS",
+    name,
+    delta
   }
 }

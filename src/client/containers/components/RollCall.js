@@ -8,7 +8,7 @@ import {setPresent} from "client/actions";
 
 const RollCall = ({delegates, present, setPresent}) => {
   return <div>
-  <table className="table">
+  <table className="table content">
     <thead>
       <tr>
         <th>Delegation</th>
@@ -19,7 +19,7 @@ const RollCall = ({delegates, present, setPresent}) => {
   </table>
   
   <div className="table-container">
-    <table className="table">
+    <table className="table content">
     
       <tbody>
       {

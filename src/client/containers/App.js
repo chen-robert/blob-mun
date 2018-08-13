@@ -4,24 +4,34 @@ import classNames from "classnames";
 
 import {Grid} from "@material-ui/core"
 
+import {connect} from "react-redux";
+
+import {toggleCollapse} from "client/actions";
+
 import Header from "./HeaderConnector";
 import Buttons from "./ButtonConnector";
 
 import RollCall from "./components/RollCall";
+import Motions from "./components/Motions";
 import SideBar from "./components/SideBar";
+import SpeakingSession from "./components/SpeakingSession";
 
 const nameToJSX = {
   "Roll Call": <RollCall />,
-  "Blah": null
+  "Motions": <Motions />,
+  "Moderated": <SpeakingSession />
 }
 
-const App = ({collapsed, currSession}) => {
+const App = ({collapsed, currSession, unCollapse}) => {
   return <div>
-    <div id="main-content" className={
+    <div id="main-content" 
+      onClick={() => unCollapse()}
+      className={
         classNames({
           "collapsed": collapsed
         })
-      }>
+      }
+    >
       <Header />
       <div className="header-padding" />
       <div className="centered-parent">
@@ -45,4 +55,10 @@ const App = ({collapsed, currSession}) => {
   </div>;
 }
 
-export default App;
+const AppConnector = connect(
+  (state) => ({}),
+  (dispatch) => ({
+    unCollapse: () => dispatch(toggleCollapse(false))
+  })
+)(App);
+export default AppConnector;
