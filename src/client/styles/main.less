@@ -5,8 +5,12 @@
 @import "colors";
 @import "speakers";
 
+@banner-height: @link-height;
+
 @header-height: 120px;
 @spacing: 50px;
+
+@button-padding: 5px;
 
 html, body{  
   height: 100%;
@@ -35,7 +39,9 @@ html, body{
   color: white;
   
   font-size: 1.5em;
-  padding: 5px;
+  
+  height: @banner-height;
+  line-height: @banner-height;
   
   position: absolute;
   bottom: 0;
@@ -50,10 +56,10 @@ html, body{
   }
 }
 
-#sidebar-button{
+.sidebar-button{
   position: absolute;
-  right: 0;
-  top: 0;
+  right: @button-padding;
+  top: @button-padding;
 }
 
 .header-padding{
@@ -82,4 +88,8 @@ html, body{
 .centered-parent{
   padding-top: @spacing;
   position: relative;
+}
+
+.hidden{
+  display: none;
 }

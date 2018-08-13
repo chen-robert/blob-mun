@@ -14,12 +14,13 @@ import Buttons from "./ButtonConnector";
 import RollCall from "./components/RollCall";
 import Motions from "./components/Motions";
 import SideBar from "./components/SideBar";
-import SpeakingSession from "./components/SpeakingSession";
+import {Moderated, Unmoderated} from "./components/SpeakingSession";
 
 const nameToJSX = {
   "Roll Call": <RollCall />,
   "Motions": <Motions />,
-  "Moderated": <SpeakingSession />
+  "Moderated": <Moderated />,
+  "Unmoderated": <Unmoderated />
 }
 
 const App = ({collapsed, currSession, unCollapse}) => {

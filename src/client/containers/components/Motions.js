@@ -98,21 +98,23 @@ class Motions extends Component{
         }}
         onClick={
           () => {
+            const stateData = {
+              timer: 0,
+              speakingTimer: 0,
+              speakingTotal: speakingTime || 1 * 60,
+              total: duration || 10 * 60,
+              paused: true,
+              currentSpeaker: delegation || delegations[0],
+              topic: topic.trim()
+            }
             switch(sessionType){
               case "mod":
-                changeState("moderated",
-                  {
-                    timer: 0,
-                    speakingTimer: 0,
-                    speakingTotal: speakingTime || 1 * 60,
-                    total: duration || 10 * 60,
-                    paused: true,
-                    currentSpeaker: delegation || delegations[0],
-                    topic: topic
-                  }
-                )
+                changeState("moderated", stateData);
                 this.props.setSession("Moderated");
-                
+                break;
+              case "unmod":
+                changeState("unmoderated", stateData);
+                this.props.setSession("Unmoderated");
                 break;
             }
           }

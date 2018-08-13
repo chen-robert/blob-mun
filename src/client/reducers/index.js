@@ -7,13 +7,16 @@ const initialState = {
   moderated: {
     timer: 0,
     speakingTimer: 0,
-    paused: false,
+    paused: true,
     speakingTotal: 1 * 60,
     total: 10 * 60,
     currentSpeaker: "Bob",
-    topic: "Bleh"
+    topic: ""
   }
 };
+//Use the same initial state data
+initialState.unmoderated = {...initialState.moderated};
+
 for(var i = 0; i < 26; i++){
   initialState.delegates.push("Bob" + i)
 }
