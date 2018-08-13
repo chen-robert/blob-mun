@@ -6,6 +6,7 @@
 @import "speakers";
 
 @header-height: 120px;
+@spacing: 50px;
 
 html, body{  
   height: 100%;
@@ -35,6 +36,10 @@ html, body{
   
   font-size: 1.5em;
   padding: 5px;
+  
+  position: absolute;
+  bottom: 0;
+  width: 100%;
 }
 
 #main-content{
@@ -53,4 +58,28 @@ html, body{
 
 .header-padding{
   height: @header-height;
+}
+
+.content-banner{
+  position: absolute;
+  top: 0;
+  left: 0;
+  
+  background-color: @light-blue;
+  
+  width: 100vw;
+  
+  color: white;
+  
+  font-size: 1.3em;
+  padding: 5px;
+}
+
+.content, .content-parent{
+  position: inherit;
+}
+
+.centered-parent{
+  padding-top: @spacing;
+  position: relative;
 }

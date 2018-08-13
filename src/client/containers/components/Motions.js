@@ -88,8 +88,14 @@ class Motions extends Component{
           }
         />
       </div>
-      <div>
+      <div style={{position: "relative"}}>
         <Button 
+        style={{
+          position: "absolute",
+          right: "-25px",
+          bottom: "-25px"
+          
+        }}
         onClick={
           () => {
             switch(sessionType){
@@ -98,10 +104,10 @@ class Motions extends Component{
                   {
                     timer: 0,
                     speakingTimer: 0,
-                    speakingTotal: speakingTime,
-                    total: duration,
+                    speakingTotal: speakingTime || 1 * 60,
+                    total: duration || 10 * 60,
                     paused: true,
-                    currentSpeaker: delegation,
+                    currentSpeaker: delegation || delegations[0],
                     topic: topic
                   }
                 )

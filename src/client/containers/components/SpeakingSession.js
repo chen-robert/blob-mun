@@ -45,7 +45,7 @@ class SpeakingSession extends Component{
       return timeMins + ":" + timeSecs;
     }
     return <div className="content">
-      <h1>{topic}</h1>
+      <div className="content-banner">{topic || "&nbsp;"}</div>
       <Grid container spacing={16}>
         <Grid item xs={3}>
           <div>
