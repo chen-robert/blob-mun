@@ -31,7 +31,7 @@ class Motions extends Component{
       }
     });
     
-    return <div>
+    return <div style={{textAlign: "left"}}>
       <Select
         placeholder="Delegation"
         isSearchable={true}
@@ -92,8 +92,8 @@ class Motions extends Component{
         <Button 
         style={{
           position: "absolute",
-          right: "-25px",
-          bottom: "-25px"
+          right: "-15px",
+          bottom: "-15px"
           
         }}
         onClick={

@@ -8,6 +8,8 @@ import {changeSessionData} from "client/actions";
 
 import Timer from "./Timer";
 
+import Select from "react-select";
+
 import {Grid, Button} from "@material-ui/core";
 import Icon from "@material-ui/core/Icon";
 
@@ -33,8 +35,27 @@ class SpeakingSession extends Component{
     clearInterval(this.timer);
   }
   render(){
-    const {names, moderated, data} = this.props;
-    const {timer, speakingTimer, total, speakingTotal, currentSpeaker, topic} = data;
+    const {names, type, data} = this.props;
+    const {timer, speakingTimer, total, speakingTotal, currentSpeaker, topic, speakers} = data;
+    
+    const codeToName = {
+      "U": "unmoderated",
+      "M": "moderated",
+      "P": "primarySpeakers",
+      "S": "secondarySpeakers"
+    }
+    const isCode = (code) => {
+      for(var i = 0; i < code.length; i++){
+        if(type === codeToName[code.charAt(i)]){
+          return true;
+        }
+      }
+      return false;
+      
+    }
+    const shouldDisplay = (code) => {
+      return isCode(code)? "": "hidden";
+    }
     
     const formatMillis = (millis) => {
       const secs = Math.floor(millis / 1000); 
@@ -46,8 +67,9 @@ class SpeakingSession extends Component{
       
       return timeMins + ":" + timeSecs;
     }
+    
     return <div className="content">
-      <div className="content-banner">{topic || "Topic"}</div>
+      <div className={"content-banner " + shouldDisplay("UM")}>{topic || "Unknown Topic"}</div>
       <Grid container spacing={16}>
         <Grid item xs={3}>
           <div>
@@ -75,54 +97,63 @@ class SpeakingSession extends Component{
             </span>
           </div>
         </Grid>
-        <Grid item xs={moderated? 6: 9}>
-        
-          <div style={{height: "50px"}} className={
-            classNames({
-              "hidden": moderated
-            })
-          }/>
-          <div className={
-            classNames({
-              "hidden": !moderated
-            })
-          }>
+        <Grid item xs={isCode("U")? 9: 6}>
+          
+          <div style={{height: "50px"}} className={shouldDisplay("UPS")}/>
+          <div className={shouldDisplay("MPS")}>
             <h3>{currentSpeaker}</h3>
             <div className="timer">{formatMillis(Math.min(speakingTimer, 1000 * speakingTotal)) + 
               "/" + formatMillis(1000 * speakingTotal)}</div>
             <Timer elapsedTime={speakingTimer} total={speakingTotal}/>
           </div>
           <div style={{height: "10px"}} />
-          <Timer elapsedTime={timer} total={total}/>
-          <div className="timer">{formatMillis(Math.min(timer, 1000 * total)) + 
-            "/" + formatMillis(1000 * total)}</div>
+          <div className={shouldDisplay("UM")}>
+            <Timer elapsedTime={timer} total={total}/>
+            <div className="timer">{formatMillis(Math.min(timer, 1000 * total)) + 
+              "/" + formatMillis(1000 * total)}</div>
+          </div>
         </Grid>
         
-        <Grid item xs={3} className={
-          classNames({
-            "hidden": !moderated
-          })
-        }>
-          
-          <div className="table-container">
-            <table className="table">
-              <tbody>
-                {
-                  names.map((name) => {
-                    return <tr 
-                    key={name}
-                    onClick={
-                      () => this.setState({currentSpeaker: name, speakingTimer: 0})
-                    }
-                    >  
-                      <td>
-                      {name}
-                      </td>
-                    </tr>
-                  })
-                }
-              </tbody>
-            </table>
+        <Grid item xs={3} className={shouldDisplay("MPS")}>
+          <div className={shouldDisplay("M")}>
+            <div className="table-container">
+              <table className="table">
+                <tbody>
+                  {
+                    names.map((name) => {
+                      return <tr 
+                      key={name}
+                      onClick={
+                        () => this.setState({currentSpeaker: name, speakingTimer: 0})
+                      }
+                      >  
+                        <td>
+                        {name}
+                        </td>
+                      </tr>
+                    })
+                  }
+                </tbody>
+              </table>
+            </div>
+          </div>
+          <div className={shouldDisplay("PS")}>
+            <Select
+              placeholder="Delegation"
+              isSearchable={true}
+              options={names.map((name) => ({value: name, label: name}))}
+              value={null}
+              onChange={
+                (e) => this.setState({speakers: [...speakers, {name: e.value, id: Math.random()}]})
+              }
+            />
+            <ul >
+            {
+              speakers.map((speaker, i) => {
+                return <li key={speaker.id}>{speaker.name}</li>
+              })
+            }
+            </ul>
           </div>
         </Grid>
       </Grid>
@@ -131,24 +162,21 @@ class SpeakingSession extends Component{
   }
 }
 
-export const Moderated = connect(
-  (state) => ({
-    names: state.delegates,
-    data: state["moderated"],
-    moderated: true
-  }),
-  (dispatch) => ({
-    changeState: (delta) => dispatch(changeSessionData("moderated", delta))
-  })
-)(SpeakingSession);
+const createType = (name) => {
+  return connect(
+    (state) => ({
+      names: state.delegates,
+      data: state[name],
+      type: name
+    }),
+    (dispatch) => ({
+      changeState: (delta) => dispatch(changeSessionData(name, delta))
+    })
+  )(SpeakingSession);
+}
 
-export const Unmoderated = connect(
-  (state) => ({
-    names: state.delegates,
-    data: state["unmoderated"],
-    moderated: false
-  }),
-  (dispatch) => ({
-    changeState: (delta) => dispatch(changeSessionData("unmoderated", delta))
-  })
-)(SpeakingSession);
+export const Moderated = createType("moderated");
+
+export const Unmoderated = createType("unmoderated");
+
+export const PrimarySpeakersList = createType("primarySpeakers")

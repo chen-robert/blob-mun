@@ -11,11 +11,14 @@ const initialState = {
     speakingTotal: 1 * 60,
     total: 10 * 60,
     currentSpeaker: "Bob",
-    topic: ""
+    topic: "",
+    speakers: []
   }
 };
 //Use the same initial state data
 initialState.unmoderated = {...initialState.moderated};
+initialState.primarySpeakers = {...initialState.moderated};
+initialState.secondarySpeakers = {...initialState.moderated};
 
 for(var i = 0; i < 26; i++){
   initialState.delegates.push("Bob" + i)
