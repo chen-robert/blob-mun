@@ -8,11 +8,13 @@ import DraggableListItem from "./DraggableListItem";
 
 import {changeSessionData} from "client/actions";
 
+import DateUtils from "utils/date";
+
 import Timer from "./Timer";
 
 import Select from "react-select";
 
-import {Grid, Button} from "@material-ui/core";
+import {Grid, Button, TextField} from "@material-ui/core";
 import Icon from "@material-ui/core/Icon";
 
 class SpeakingSession extends Component{  
@@ -38,7 +40,19 @@ class SpeakingSession extends Component{
   }
   render(){
     const {names, type, data} = this.props;
-    const {timer, speakingTimer, total, speakingTotal, currentSpeaker, topic, speakers} = data;
+    const {currentSpeaker, topic, speakers} = data;
+    
+    const {speakingTimerStr, timerStr, speakingTotalStr, totalStr} = {
+      speakingTimerStr: data.speakingTimer, 
+      timerStr: data.timer, 
+      speakingTotalStr: data.speakingTotal, 
+      totalStr: data.total
+    };
+    
+    const speakingTimer = DateUtils.parseStr(speakingTimerStr);
+    const timer = DateUtils.parseStr(timerStr);
+    const speakingTotal = DateUtils.parseStr(speakingTotalStr) || 1 * 60;
+    const total = DateUtils.parseStr(totalStr) || 10 * 60;
     
     const codeToName = {
       "U": "unmoderated",
@@ -99,6 +113,34 @@ class SpeakingSession extends Component{
                 Reset
               </Button>
             </span>
+            <div className={shouldDisplay("MPS")}>
+              <TextField
+                value={speakingTotalStr}
+                label="Speaking Times"
+                placeholder="1:00"
+                onChange={
+                  (e) => {
+                    if(DateUtils.testStr(e.target.value)){
+                      this.setState({speakingTotal: e.target.value});              
+                    }
+                  }
+                }
+              />
+            </div>
+            <div className={shouldDisplay("UM")}>
+              <TextField
+                value={totalStr}
+                label="Duration"
+                placeholder="10:00"
+                onChange={
+                  (e) => {
+                    if(DateUtils.testStr(e.target.value)){
+                      this.setState({total: e.target.value});              
+                    }
+                  }
+                }
+              />
+            </div>
           </div>
         </Grid>
         <Grid item xs={isCode("U")? 9: 6}>
@@ -212,4 +254,6 @@ export const Moderated = createType("moderated");
 
 export const Unmoderated = createType("unmoderated");
 
-export const PrimarySpeakersList = createType("primarySpeakers")
+export const PrimarySpeakersList = createType("primarySpeakers");
+
+export const SecondarySpeakersList = createType("secondarySpeakers");

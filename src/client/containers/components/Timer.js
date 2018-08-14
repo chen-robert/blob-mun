@@ -9,7 +9,8 @@ const Timer = ({elapsedTime, total}) => {
   const totalMillis = total * 1000;
   
   const percentage = 100 * elapsedTime / totalMillis;
-  return <LinearProgress variant="determinate" value={percentage} />
+  
+  return <LinearProgress color={percentage > 100? "secondary": "primary"} variant="determinate" value={percentage} />
 }
 
 

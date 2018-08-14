@@ -9,6 +9,8 @@ import Select from "react-select";
 
 import {connect} from "react-redux";
 
+import DateUtils from "utils/date";
+
 class Motions extends Component{
   constructor(props){
     super(props);
@@ -71,7 +73,7 @@ class Motions extends Component{
           placeholder="mm:ss"
           onChange={
             (e) => {
-              if(e.target.value === "" || /^[:|\d]+$/.test(e.target.value)){
+              if(DateUtils.testStr(e.target.value)){
                 this.setState({speakingTime: e.target.value});              
               }
             }
