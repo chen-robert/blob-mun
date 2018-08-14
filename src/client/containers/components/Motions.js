@@ -110,11 +110,11 @@ class Motions extends Component{
             switch(sessionType){
               case "mod":
                 changeState("moderated", stateData);
-                this.props.setSession("Moderated");
+                this.props.setSession("Moderated Caucus");
                 break;
               case "unmod":
                 changeState("unmoderated", stateData);
-                this.props.setSession("Unmoderated");
+                this.props.setSession("Unmoderated Caucus");
                 break;
             }
           }

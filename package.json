@@ -15,6 +15,7 @@
     "less": "^3.8.0",
     "react": "^16.4.2",
     "react-dom": "^16.4.2",
+    "react-draggable-list": "^3.5.3",
     "react-redux": "^5.0.7",
     "react-select": "^2.0.0",
     "redux": "^4.0.0",

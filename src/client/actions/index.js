@@ -33,3 +33,11 @@ export const changeSessionData = (name, delta) => {
     delta
   }
 }
+
+export const updateItem = (item, delta) => {
+  return {
+    type: "UPDATE_ITEM",
+    item,
+    delta
+  }
+}

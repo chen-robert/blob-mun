@@ -3,6 +3,8 @@ import React, {Component} from "react";
 import {connect} from "react-redux";
 
 import classNames from "classnames";
+import DraggableList from "react-draggable-list";
+import DraggableListItem from "./DraggableListItem";
 
 import {changeSessionData} from "client/actions";
 
@@ -68,6 +70,8 @@ class SpeakingSession extends Component{
       return timeMins + ":" + timeSecs;
     }
     
+    let container;
+    
     return <div className="content">
       <div className={"content-banner " + shouldDisplay("UM")}>{topic || "Unknown Topic"}</div>
       <Grid container spacing={16}>
@@ -99,9 +103,11 @@ class SpeakingSession extends Component{
         </Grid>
         <Grid item xs={isCode("U")? 9: 6}>
           
+          <div className={shouldDisplay("MPS")}>
+            <h3>{isCode("PS")? speakers[0] && speakers[0].name:currentSpeaker}</h3>
+          </div>
           <div style={{height: "50px"}} className={shouldDisplay("UPS")}/>
           <div className={shouldDisplay("MPS")}>
-            <h3>{currentSpeaker}</h3>
             <div className="timer">{formatMillis(Math.min(speakingTimer, 1000 * speakingTotal)) + 
               "/" + formatMillis(1000 * speakingTotal)}</div>
             <Timer elapsedTime={speakingTimer} total={speakingTotal}/>
@@ -138,22 +144,49 @@ class SpeakingSession extends Component{
             </div>
           </div>
           <div className={shouldDisplay("PS")}>
-            <Select
-              placeholder="Delegation"
-              isSearchable={true}
-              options={names.map((name) => ({value: name, label: name}))}
-              value={null}
-              onChange={
-                (e) => this.setState({speakers: [...speakers, {name: e.value, id: Math.random()}]})
-              }
-            />
-            <ul >
-            {
-              speakers.map((speaker, i) => {
-                return <li key={speaker.id}>{speaker.name}</li>
+            <div className="ontop">
+              <Select
+                placeholder="Delegation"
+                isSearchable={true}
+                options={names.map((name) => ({value: name, label: name}))}
+                value={null}
+                onChange={
+                  (e) => this.setState({speakers: [...speakers, {
+                    name: e.value, 
+                    id: Math.random()
+                  }]})
+                }
+              />
+            </div>
+            <div style={{height: "10px"}}/>
+            <Button 
+            onClick={
+              () => this.setState({
+                paused: true,
+                speakingTimer: 0,
+                timer: 0
               })
             }
-            </ul>
+            variant="contained">
+              Clear
+            </Button>
+            <div style={{height: "10px"}}/>
+            <div className="draglist"
+              ref={(
+                elem) => {
+                  if(elem)container = elem;
+                }
+              }
+            >
+              <DraggableList
+                itemKey="id"
+                template={DraggableListItem}
+                list={speakers}
+                onMoveEnd={(newList) => this.setState({speakers: newList})}
+                container={() => container}
+              
+              />
+            </div>
           </div>
         </Grid>
       </Grid>

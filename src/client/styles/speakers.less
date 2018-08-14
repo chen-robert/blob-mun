@@ -1,3 +1,7 @@
+@import "colors";
+
+@close-button-width: 10px;
+
 .content{
   width: 60vw;
 }
@@ -10,4 +14,35 @@
 
 .content .table{
   max-height: 25vh;
+}
+
+.draglist{
+  height: 50vh;
+  overflow: auto;
+  
+  padding-right: 5px;
+}
+.draglist-item{
+  cursor: pointer;
+  
+  & > div{
+    background-color: red;
+  }
+  
+  & .text{
+    width: calc(100% - @close-button-width);
+    display: inline-block;
+    
+    background-color: white;
+    cursor: default;
+  }
+  & .close-button{
+    display: inline-block;
+    height: 100%;
+    
+    width: @close-button-width;
+  }
+}
+.draglist-item .toggled{
+  background-color: @nice-gray;
 }

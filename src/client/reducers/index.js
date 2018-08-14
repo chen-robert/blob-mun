@@ -1,24 +1,24 @@
 const initialState = {
-  delegates: ["Bob", "Joe", "Samuel", "Johns"],
+  delegates: ["Democratic Republic Of Congo", "Joe", "Samuel", "Johns"],
   present: {},
   comitteeName: "Blob Mun",
-  sessionName: "Motions",
+  sessionName: "Primary Speakers List",
   collapsed: true,
-  moderated: {
+  genericRoom: {
     timer: 0,
     speakingTimer: 0,
     paused: true,
     speakingTotal: 1 * 60,
     total: 10 * 60,
-    currentSpeaker: "Bob",
+    currentSpeaker: "",
     topic: "",
     speakers: []
   }
 };
-//Use the same initial state data
-initialState.unmoderated = {...initialState.moderated};
-initialState.primarySpeakers = {...initialState.moderated};
-initialState.secondarySpeakers = {...initialState.moderated};
+const rooms = ["moderated", "unmoderated", "primarySpeakers", "secondarySpeakers"];
+rooms.forEach((name) => {
+  initialState[name] = {...initialState.genericRoom}
+});
 
 for(var i = 0; i < 26; i++){
   initialState.delegates.push("Bob" + i)
@@ -46,8 +46,33 @@ const reducer = (state = initialState, action) => {
     case "SET_SESSION":
       return {...state, sessionName: action.session};
     case "CHANGE_SESS":
-      const newSessData = Object.assign({...state[action.name]}, action.delta);
+      const newSessData = Object.assign({}, state[action.name], action.delta);
       return {...state, [action.name]: newSessData};
+    case "UPDATE_ITEM":
+      let ret = state;
+      rooms.forEach((room) => {
+        const index = state[room].speakers.indexOf(action.item);
+        if(index !== -1){
+          const speakers = state[room].speakers;
+          const newItem = Object.assign({}, speakers[index], action.delta);
+          
+          let newList;
+          
+          if(action.delta === null){
+            newList = [...speakers];
+            newList.splice(index, 1);
+          }else{
+            newList = [...speakers.slice(0, index), newItem, ...speakers.slice(index + 1)];
+          }
+          const newState = {...state,
+            [room]: {...state[room],
+              speakers: newList,
+            }
+          }
+          ret = newState;
+        }
+      });
+      return ret;
     default:
       return state;
   }
