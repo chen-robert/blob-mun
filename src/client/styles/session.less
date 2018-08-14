@@ -51,12 +51,15 @@
     background-color: @nice-gray;
   }
   
-  & td:hover{
+  & td:not(td:nth-child(1)):hover{
     background-color: @hover-nice-blue !important;
   }
   
   &:hover td:nth-child(1){
-    background-color: @nice-gray !important;
+    background-color: @nice-gray;
+  }
+  & td:nth-child(1):hover{
+    background-color: @nice-red;
   }
  
 }

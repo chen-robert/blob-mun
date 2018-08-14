@@ -2,7 +2,7 @@ const initialState = {
   delegates: ["Democratic Republic Of Congo", "Joe", "Samuel", "Johns"],
   present: {},
   comitteeName: "Blob Mun",
-  sessionName: "Primary Speakers List",
+  sessionName: "Roll Call",
   collapsed: true,
   genericRoom: {
     timer: 0,
@@ -73,6 +73,14 @@ const reducer = (state = initialState, action) => {
         }
       });
       return ret;
+    case "REMOVE_DELEGATE":
+      
+      const newList = [...state.delegates];
+      const index = newList.indexOf(action.name);
+      
+      if(index >= 0)newList.splice(index, 1);
+      
+      return {...state, delegates: newList};
     default:
       return state;
   }

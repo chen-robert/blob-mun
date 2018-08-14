@@ -4,9 +4,9 @@ import classNames from "classnames";
 
 import {connect} from "react-redux";
 
-import {setPresent} from "client/actions";
+import {setPresent, removeDelegate} from "client/actions";
 
-const RollCall = ({delegates, present, setPresent}) => {
+const RollCall = ({delegates, present, setPresent, removeDelegate}) => {
   return <div>
   <table className="table content">
     <thead>
@@ -31,7 +31,13 @@ const RollCall = ({delegates, present, setPresent}) => {
             return status;
           }
           return <tr key={name}>
-            <td>{name}</td>
+            <td
+            onClick={
+              () => {
+                if(confirm(`Remove ${name}?`))removeDelegate(name);
+              }
+            }
+            >{name}</td>
             <td 
             onClick={
               () => setPresent(name, getStatus("PRESENT"))
@@ -66,7 +72,8 @@ const RollCallConnector = connect(
     present: state.present
   }),
   (dispatch) => ({
-    setPresent: (name, status) => dispatch(setPresent(name, status))
+    setPresent: (name, status) => dispatch(setPresent(name, status)),
+    removeDelegate: (name) => dispatch(removeDelegate(name))
   })
 )(RollCall);
 

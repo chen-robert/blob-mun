@@ -41,3 +41,10 @@ export const updateItem = (item, delta) => {
     delta
   }
 }
+
+export const removeDelegate = (name) => {
+  return {
+    type: "REMOVE_DELEGATE",
+    name
+  }
+}

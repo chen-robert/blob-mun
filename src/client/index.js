@@ -1,25 +1,26 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import {createStore} from "redux";
-import { Provider } from 'react-redux'
+import {Provider} from "react-redux";
+import {BrowserRouter} from "react-router-dom";
 
 import App from "./containers/App.js";
 
 import reducer from "./reducers";
 
 import "./styles/main.less";
-import "./styles/session.less";
+import "./styles/login.less";
 
 import incrementTimer from "client/actions";
 
 const store = createStore(reducer);
  
 const render = () => ReactDOM.render(
-  <Provider store={store}>
-    <App collapsed={store.getState().collapsed}
-      currSession={store.getState().sessionName}
-    />
-  </Provider>,
+  <BrowserRouter>
+    <Provider store={store}>
+      <App/>
+    </Provider>
+  </BrowserRouter>,
   document.getElementById("app"));
 
 render();
