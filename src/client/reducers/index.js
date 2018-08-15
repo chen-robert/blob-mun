@@ -15,6 +15,7 @@ const initialState = {
     speakers: []
   }
 };
+
 const rooms = ["moderated", "unmoderated", "primarySpeakers", "secondarySpeakers"];
 rooms.forEach((name) => {
   initialState[name] = {...initialState.genericRoom}
@@ -32,7 +33,7 @@ const reducer = (state = initialState, action) => {
     case "ADD_DELEGATE":
       
       return {...state, 
-        delegates: [...delegates, action.name]
+        delegates: [...state.delegates, action.name]
       };
     case "TOGGLE_COLLAPSE":
       return {...state, 
