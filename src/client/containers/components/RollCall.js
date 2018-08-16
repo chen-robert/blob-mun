@@ -1,4 +1,4 @@
-import React from "react";
+import React, {Component} from "react";
 
 import classNames from "classnames";
 
@@ -8,85 +8,99 @@ import {TextField} from "@material-ui/core";
 
 import {setPresent, removeDelegate, addDelegate} from "client/actions";
 
-const RollCall = ({delegates, present, setPresent, removeDelegate, addDelegate}) => {
-  delegates.sort();
-  
-  return (
-  <div>
-    <table className="table content">
-      <thead>
-        <tr>
-          <th>Delegation</th>
-          <th>Present</th>
-          <th>Present and Voting</th>
-        </tr>
-      </thead>
-    </table>
+class RollCall extends Component{
+  constructor(props){
+    super(props);
     
-    <div className="table-container">
+    this.state = {
+      inputVal: ""
+    }
+  }
+  render(){
+    const {delegates, present, setPresent, removeDelegate, addDelegate} = this.props;
+    delegates.sort();
+    
+    return (
+    <div>
       <table className="table content">
-      
-        <tbody>
-        {
-          delegates.map((name) => {
-            const presentStatus = present[name];
-            
-            const getStatus = (status) => {
-              if(status === presentStatus)return "Absent";
-              return status;
-            }
-            return <tr key={name}>
-              <td
-              className="hover-red"
-              onClick={
-                () => {
-                  if(confirm(`Remove ${name}?`))removeDelegate(name);
-                }
-              }
-              >{name}</td>
-              <td 
-              onClick={
-                () => setPresent(name, getStatus("PRESENT"))
-              }
-              className={
-                classNames({
-                  "toggled": presentStatus === "PRESENT" || presentStatus === "PRESENT_VOTING"
-                })
-              }></td>
-              <td 
-              onClick={
-                () => setPresent(name, getStatus("PRESENT_VOTING"))
-              }            
-              className={
-                classNames({
-                  "toggled": presentStatus === "PRESENT_VOTING"
-                })
-              }></td>
-            </tr>
-          })
-        }
-        </tbody>
+        <thead>
+          <tr>
+            <th>Delegation</th>
+            <th>Present</th>
+            <th>Present and Voting</th>
+          </tr>
+        </thead>
       </table>
-    </div>
-    <TextField
-      label="Add Delegate"
-      placeholder="Name"
-      onKeyPress={
-        (e) => {
-          if(e.key === "Enter"){
-            const name = e.target.value;
-            if(delegates.indexOf(name) === -1){
-              addDelegate(name);              
-            }else{
-              alert(`${name} is already a delegate!`);
+      
+      <div className="table-container">
+        <table className="table content">
+        
+          <tbody>
+          {
+            delegates.map((name) => {
+              const presentStatus = present[name];
+              
+              const getStatus = (status) => {
+                if(status === presentStatus)return "Absent";
+                return status;
+              }
+              return <tr key={name}>
+                <td
+                className="hover-red"
+                onClick={
+                  () => {
+                    if(confirm(`Remove ${name}?`))removeDelegate(name);
+                  }
+                }
+                >{name}</td>
+                <td 
+                onClick={
+                  () => setPresent(name, getStatus("PRESENT"))
+                }
+                className={
+                  classNames({
+                    "toggled": presentStatus === "PRESENT" || presentStatus === "PRESENT_VOTING"
+                  })
+                }></td>
+                <td 
+                onClick={
+                  () => setPresent(name, getStatus("PRESENT_VOTING"))
+                }            
+                className={
+                  classNames({
+                    "toggled": presentStatus === "PRESENT_VOTING"
+                  })
+                }></td>
+              </tr>
+            })
+          }
+          </tbody>
+        </table>
+      </div>
+      <TextField
+        label="Add Delegate"
+        placeholder="Name"
+        value={this.state.inputVal}
+        onKeyPress={
+          (e) => {
+            if(e.key === "Enter"){
+              const name = e.target.value;
+              if(delegates.indexOf(name) === -1){
+                addDelegate(name);              
+              }else{
+                alert(`${name} is already a delegate!`);
+              }
+              this.setState({inputVal: ""});
             }
           }
         }
-      }
-    />
-  </div>);
+        onChange={
+          (e) => this.setState({inputVal: e.target.value})
+        }
+      />
+    </div>);
+  }
 }
-
 
 const RollCallConnector = connect(
   (state) => ({
