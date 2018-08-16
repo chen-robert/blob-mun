@@ -2,20 +2,33 @@ import React, {Component} from "react";
 
 import {AppBar, Tabs, Tab, Card, CardContent, Grid} from "@material-ui/core";
 
+import classNames from "classnames";
+
 import LoginForm from "./components/login/LoginForm";
 import SignUpForm from "./components/login/SignUpForm";
 
-const tabs = [<LoginForm/>, <SignUpForm/>];
 
 class Login extends Component {
+  
   constructor(props){
     super(props);
     
     this.state = {
-      index: 0
+      index: 0,
+      popupText: "",
+      showPopup: false
     }
   }
   render(){
+    let popupTimeout;
+    
+    const tabs = [<LoginForm/>, <SignUpForm popup={(text) => {
+      clearTimeout(popupTimeout);
+      
+      this.setState({popupText: text, showPopup: true});
+      popupTimeout = setTimeout(() => this.setState({showPopup: false}), 3000);
+    }} switchToLogin={() => this.setState({index: 0})}/>];
+    
     return (
     <Grid 
       style={{height: "100%"}}
@@ -43,7 +56,14 @@ class Login extends Component {
           {tabs[this.state.index]}
         </CardContent>
       </Card>
-    </Grid>);
+      <div className={
+        classNames({
+          popup: true,
+          toggled: this.state.showPopup
+        })
+      }>{this.state.popupText}</div>
+    </Grid>
+    );
   }
 }
 
