@@ -17,7 +17,9 @@
     "@material-ui/icons": "^2.0.0",
     "express": "^4.16.3",
     "express-session": "^1.15.6",
+    "joi": "^13.6.0",
     "less": "^3.8.0",
+    "mssql": "^4.1.0",
     "react": "^16.4.2",
     "react-dom": "^16.4.2",
     "react-draggable-list": "^3.5.3",
@@ -25,6 +27,8 @@
     "react-router-dom": "^4.3.1",
     "react-select": "^2.0.0",
     "redux": "^4.0.0",
+    "tedious": "^2.6.4",
+    "typeface-roboto": "0.0.54",
     "webpack": "^4.16.5",
     "webpack-cli": "^3.1.0",
     "webpack-dev-server": "^3.1.5"
@@ -37,6 +41,7 @@
     "babel-preset-env": "^1.7.0",
     "babel-preset-react": "^6.24.1",
     "css-loader": "^1.0.0",
+    "file-loader": "^1.1.11",
     "less-loader": "^4.1.0",
     "nodemon": "^1.18.3",
     "style-loader": "^0.21.0"

@@ -11,6 +11,8 @@ import reducer from "./reducers";
 import "./styles/main.less";
 import "./styles/login.less";
 
+import "typeface-roboto";
+
 import incrementTimer from "client/actions";
 
 const store = createStore(reducer);

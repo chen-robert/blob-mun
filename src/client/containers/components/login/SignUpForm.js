@@ -9,6 +9,9 @@ const SignUpForm = () => {
         <TextField fullWidth required name="username" label="Username" placeholder="Username"/>
       </div>
       <div>
+        <TextField fullWidth required type="email" name="email" label="Email" placeholder="Email"/>
+      </div>
+      <div>
         <TextField fullWidth required name="password" label="Password" placeholder="Password"/>
       </div>
       <div style={{height: "10px"}}/>
