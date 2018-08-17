@@ -2,8 +2,8 @@ const Validator = {
   addUser: (name, email, password, callback) => {
     callback();
   },
-  checkLogin: (name, password) => {
-    
+  checkLogin: (name, password, callback) => {
+    callback();
   }
   
 }

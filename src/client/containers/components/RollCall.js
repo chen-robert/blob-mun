@@ -104,8 +104,8 @@ class RollCall extends Component{
 
 const RollCallConnector = connect(
   (state) => ({
-    delegates: state.delegates,
-    present: state.present
+    delegates: state.currState.delegates,
+    present: state.currState.present
   }),
   (dispatch) => ({
     setPresent: (name, status) => dispatch(setPresent(name, status)),

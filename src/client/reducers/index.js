@@ -1,34 +1,43 @@
 const initialState = {
-  delegates: ["Democratic Republic Of Congo", "Joe", "Samuel", "Johns"],
-  present: {},
-  comitteeName: "Blob Mun",
-  sessionName: "Roll Call",
-  collapsed: true,
-  genericRoom: {
-    timer: 0,
-    speakingTimer: 0,
-    paused: true,
-    speakingTotal: 1 * 60,
-    total: 10 * 60,
-    currentSpeaker: "",
-    topic: "",
-    speakers: []
-  }
+  currState: {
+    delegates: ["Democratic Republic Of Congo", "Joe", "Samuel", "Johns"],
+    present: {},
+    comitteeName: "Blob Mun",
+    sessionName: "Roll Call",
+    collapsed: true,
+    genericRoom: {
+      timer: 0,
+      speakingTimer: 0,
+      paused: true,
+      speakingTotal: 1 * 60,
+      total: 10 * 60,
+      currentSpeaker: "",
+      topic: "",
+      speakers: []
+    }
+  },
+  prevStates: []
 };
 
 const rooms = ["moderated", "unmoderated", "primarySpeakers", "secondarySpeakers"];
 rooms.forEach((name) => {
-  initialState[name] = {...initialState.genericRoom}
+  initialState.currState[name] = {...initialState.currState.genericRoom}
 });
 
 for(var i = 0; i < 26; i++){
-  initialState.delegates.push("Bob" + i)
+  initialState.currState.delegates.push("Bob" + i)
 }
-initialState.delegates.forEach((name) => {
-  initialState.present[name] = "PRESENT";
+initialState.currState.delegates.forEach((name) => {
+  initialState.currState.present[name] = "PRESENT";
 });
 
 const reducer = (state = initialState, action) => {
+  const newState = applyToCurrState(state.currState, action);
+  return {...state, currState: newState};
+  
+};
+
+const applyToCurrState = (state, action) => {
   switch (action.type) {
     case "ADD_DELEGATE":
       
@@ -85,6 +94,6 @@ const reducer = (state = initialState, action) => {
     default:
       return state;
   }
-};
+}
 
 export default reducer;

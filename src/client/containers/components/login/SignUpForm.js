@@ -22,10 +22,10 @@ class SignUpForm extends Component{
         
         axios.post("/signup", this.state)
           .then((res) => {
-            popup(res.data);
+            popup(res.data, true);
             switchToLogin();
           })
-          .catch((err) => console.log(err));
+          .catch((err) => popup(err.data, false));
       }
     }>
         <div>

@@ -66,8 +66,8 @@ const MUN = ({collapsed, currSession, unCollapse}) => {
 
 const MUNConnector = connect(
   (state) => ({
-    collapsed: state.collapsed,
-    currSession: state.sessionName
+    collapsed: state.currState.collapsed,
+    currSession: state.currState.sessionName
   }),
   (dispatch) => ({
     unCollapse: () => dispatch(toggleCollapse(false))

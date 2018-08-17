@@ -131,7 +131,7 @@ class Motions extends Component{
 
 const MotionsConnector = connect(
   (state) => ({
-    delegations: state.delegates
+    delegations: state.currState.delegates
   }),
   (dispatch) => ({
     changeState: (name, delta) => dispatch(changeSessionData(name, delta)),

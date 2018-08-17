@@ -22,12 +22,19 @@ class Login extends Component {
   render(){
     let popupTimeout;
     
-    const tabs = [<LoginForm/>, <SignUpForm popup={(text) => {
+    const {history} = this.props;
+    
+    const popup = (text) => {
       clearTimeout(popupTimeout);
       
       this.setState({popupText: text, showPopup: true});
       popupTimeout = setTimeout(() => this.setState({showPopup: false}), 3000);
-    }} switchToLogin={() => this.setState({index: 0})}/>];
+    }
+    
+    const tabs = [
+      <LoginForm popup={popup} redirect={() => history.push("/dashboard")}/>, 
+      <SignUpForm popup={popup} switchToLogin={() => this.setState({index: 0})}/>
+    ];
     
     return (
     <Grid 

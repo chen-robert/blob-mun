@@ -240,8 +240,8 @@ class SpeakingSession extends Component{
 const createType = (name) => {
   return connect(
     (state) => ({
-      names: state.delegates,
-      data: state[name],
+      names: state.currState.delegates,
+      data: state.currState[name],
       type: name
     }),
     (dispatch) => ({

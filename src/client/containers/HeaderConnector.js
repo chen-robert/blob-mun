@@ -6,8 +6,8 @@ import Header from "./components/Header.js";
 
 const HeaderConnector = connect(
   (state) => ({
-    comitteeName: state.comitteeName,
-    sessionName: state.sessionName
+    comitteeName: state.currState.comitteeName,
+    sessionName: state.currState.sessionName
   })
 )(Header);
 

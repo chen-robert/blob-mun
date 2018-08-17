@@ -29,7 +29,7 @@ const SideBar = ({names, currSession, setSession}) => {
 }
 const SideBarConnector = connect(
   (state) => ({
-    currSession: state.sessionName
+    currSession: state.currState.sessionName
   }),
   (dispatch) => ({
     setSession: (session) => dispatch(setSession(session))
