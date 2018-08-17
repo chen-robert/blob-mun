@@ -1,22 +1,18 @@
 import React, {Component} from "react";
-
 import {connect} from "react-redux";
-
+import Select from "react-select";
 import classNames from "classnames";
 import DraggableList from "react-draggable-list";
-import DraggableListItem from "./DraggableListItem";
-
-import {changeSessionData, updateItem} from "client/actions";
 import {withRouter} from "react-router";
-
-import DateUtils from "utils/date";
-
-import Timer from "./Timer";
-
-import Select from "react-select";
 
 import {Grid, Button, TextField} from "@material-ui/core";
 import Icon from "@material-ui/core/Icon";
+
+import {changeSessionData, updateItem} from "client/actions";
+import DraggableListItem from "./DraggableListItem";
+import DelegateTable from "./DelegateTable";
+import DateUtils from "utils/date";
+import Timer from "./Timer";
 
 class SpeakingSession extends Component{  
   setState(delta){
@@ -147,7 +143,7 @@ class SpeakingSession extends Component{
         <Grid item xs={isCode("U")? 9: 6}>
           
           <div className={shouldDisplay("MPS")}>
-            <h3>{isCode("PS")? speakers[0] && speakers[0].name:currentSpeaker}</h3>
+            <h3>{isCode("PS")? (speakers[0] !== undefined ? speakers[0].name: ""):currentSpeaker}</h3>
           </div>
           <div style={{height: "50px"}} className={shouldDisplay("UPS")}/>
           <div className={shouldDisplay("MPS")}>
@@ -165,26 +161,9 @@ class SpeakingSession extends Component{
         
         <Grid item xs={3} className={shouldDisplay("MPS")}>
           <div className={shouldDisplay("M")}>
-            <div className="table-container">
-              <table className="table">
-                <tbody>
-                  {
-                    names.map((name) => {
-                      return <tr 
-                      key={name}
-                      onClick={
-                        () => this.setState({currentSpeaker: name, speakingTimer: 0})
-                      }
-                      >  
-                        <td>
-                        {name}
-                        </td>
-                      </tr>
-                    })
-                  }
-                </tbody>
-              </table>
-            </div>
+            <DelegateTable names={names}
+              onClick={(name) => this.setState({currentSpeaker: name, speakingTimer: 0})}
+            />
           </div>
           <div className={shouldDisplay("PS")}>
             <div className="ontop">
@@ -215,8 +194,7 @@ class SpeakingSession extends Component{
             </Button>
             <div style={{height: "10px"}}/>
             <div className="draglist"
-              ref={(
-                elem) => {
+              ref={(elem) => {
                   if(elem)container = elem;
                 }
               }
