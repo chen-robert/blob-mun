@@ -1,5 +1,5 @@
 import React, {Component} from "react";
-
+import {withRouter} from "react-router";
 import classNames from "classnames";
 import {connect} from "react-redux";
 
@@ -13,7 +13,9 @@ class DraggableListItem extends Component{
     super(props);
   }
   render(){
-    const {item, updateItem, dragHandle} = this.props;
+    const {item, dragHandle, commonProps} = this.props;
+    const {updateItem} = commonProps;
+    
     return <Card className="draglist-item">
       {dragHandle(
       <div
@@ -37,12 +39,5 @@ class DraggableListItem extends Component{
   }
 }
 
-const DraggableListItemConnector = connect(
-  (state) => ({}),
-  (dispatch) => ({
-    updateItem: (item, delta) => dispatch(updateItem(item, delta))
-  })
-)(DraggableListItem);
 
-
-export default DraggableListItemConnector;
+export default DraggableListItem;

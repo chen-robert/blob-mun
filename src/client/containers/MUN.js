@@ -5,6 +5,7 @@ import classNames from "classnames";
 import {Grid, Card, CardContent} from "@material-ui/core"
 
 import {connect} from "react-redux";
+import {withRouter} from "react-router";
 
 import {toggleCollapse} from "client/actions";
 
@@ -29,7 +30,7 @@ const allowOverflow = {
   overflow: "visible"
 }
 
-const MUN = ({collapsed, currSession, unCollapse}) => {
+const MUN = ({collapsed, currSession, unCollapse, setState}) => {
   return <div>
     <div id="main-content" 
       onClick={() => unCollapse()}
@@ -64,13 +65,14 @@ const MUN = ({collapsed, currSession, unCollapse}) => {
   </div>;
 }
 
-const MUNConnector = connect(
-  (state) => ({
-    collapsed: state.currState.collapsed,
-    currSession: state.currState.sessionName
+const MUNConnector = withRouter(connect(
+  (state, ownProps) => ({
+    collapsed: state.allStates[ownProps.match.params.id].collapsed,
+    currSession: state.allStates[ownProps.match.params.id].sessionName
   }),
-  (dispatch) => ({
-    unCollapse: () => dispatch(toggleCollapse(false))
+  (dispatch, ownProps) => ({
+    unCollapse: () => dispatch(toggleCollapse(false, ownProps.match.params.id))
   })
-)(MUN);
+)(MUN));
+
 export default MUNConnector;

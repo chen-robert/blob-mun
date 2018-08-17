@@ -1,7 +1,6 @@
 import React from "react";
-
 import classNames from "classnames";
-
+import {withRouter} from "react-router";
 import {connect} from "react-redux";
 
 import {setSession} from "client/actions";
@@ -27,13 +26,13 @@ const SideBar = ({names, currSession, setSession}) => {
   }
   </ul>
 }
-const SideBarConnector = connect(
-  (state) => ({
-    currSession: state.currState.sessionName
+const SideBarConnector = withRouter(connect(
+  (state, ownProps) => ({
+    currSession: state.allStates[ownProps.match.params.id].sessionName
   }),
-  (dispatch) => ({
-    setSession: (session) => dispatch(setSession(session))
+  (dispatch, ownProps) => ({
+    setSession: (session) => dispatch(setSession(session, ownProps.match.params.id))
   })
-)(SideBar);
+)(SideBar));
 
 export default SideBarConnector;

@@ -1,8 +1,9 @@
 const initialState = {
-  currState: {
+  generic: {
+    id: "LOL",
     delegates: ["Democratic Republic Of Congo", "Joe", "Samuel", "Johns"],
     present: {},
-    comitteeName: "Blob Mun",
+    committeeName: "Blob Mun",
     sessionName: "Roll Call",
     collapsed: true,
     genericRoom: {
@@ -16,28 +17,36 @@ const initialState = {
       speakers: []
     }
   },
-  prevStates: []
+  allStates: {}
 };
 
 const rooms = ["moderated", "unmoderated", "primarySpeakers", "secondarySpeakers"];
 rooms.forEach((name) => {
-  initialState.currState[name] = {...initialState.currState.genericRoom}
+  initialState.generic[name] = {...initialState.generic.genericRoom}
 });
 
 for(var i = 0; i < 26; i++){
-  initialState.currState.delegates.push("Bob" + i)
+  initialState.generic.delegates.push("Bob" + i)
 }
-initialState.currState.delegates.forEach((name) => {
-  initialState.currState.present[name] = "PRESENT";
+initialState.generic.delegates.forEach((name) => {
+  initialState.generic.present[name] = "PRESENT";
 });
 
+initialState.allStates[initialState.generic.id] = {...initialState.generic};
 const reducer = (state = initialState, action) => {
-  const newState = applyToCurrState(state.currState, action);
-  return {...state, currState: newState};
+  //Required an id for all actions
+  if(action.id === undefined)return state;
   
+  const newState = applyToState(state.allStates[action.id], action);
+  
+  return {...state, 
+    allStates: {...state.allStates,    
+      [action.id]: newState
+    }
+  }
 };
 
-const applyToCurrState = (state, action) => {
+const applyToState = (state, action) => {
   switch (action.type) {
     case "ADD_DELEGATE":
       

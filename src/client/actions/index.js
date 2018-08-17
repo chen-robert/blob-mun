@@ -1,50 +1,57 @@
-export const addDelegate = (name) => {
+export const addDelegate = (name, id) => {
   return {
     type: "ADD_DELEGATE",
-    name
+    name,
+    id
   }
 }
 
-export const setPresent = (name, status) => {
+export const setPresent = (name, status, id) => {
   return {
     type: "PRESENT_STATUS",
     name,
-    status    
+    status,
+    id    
   }
 }
 
-export const toggleCollapse = (value) => {
+export const toggleCollapse = (value, id) => {
   return {
     type: "TOGGLE_COLLAPSE",
-    value
+    value,
+    id
   }
 }
-export const setSession = (session) => {
+export const setSession = (session, id) => {
   return {
     type: "SET_SESSION",
-    session
+    session,
+    id
   }
 }
 
-export const changeSessionData = (name, delta) => {
+export const changeSessionData = (name, delta, id) => {
   return {
     type: "CHANGE_SESS",
     name,
-    delta
+    delta,
+    id
   }
 }
 
-export const updateItem = (item, delta) => {
+export const updateItem = (item, delta, id) => {
   return {
     type: "UPDATE_ITEM",
     item,
-    delta
+    delta,
+    id
   }
 }
 
-export const removeDelegate = (name) => {
+export const removeDelegate = (name, id) => {
   return {
     type: "REMOVE_DELEGATE",
-    name
+    name,
+    id
   }
 }

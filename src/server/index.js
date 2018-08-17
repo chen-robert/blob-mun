@@ -61,5 +61,10 @@ app.post("/signup", (req, res) => {
 app.get("/login", (req, res) => {
   res.sendFile(path.join(global.__rootdir, "dist/index.html"));
 });
-
+app.get("/dashboard", (req, res) => {
+  res.sendFile(path.join(global.__rootdir, "dist/index.html"));
+});
+app.get("/committee/*", (req, res) => {
+  res.sendFile(path.join(global.__rootdir, "dist/index.html"));
+});
 app.listen(PORT, () => console.log(`Listening on port ${PORT}`));

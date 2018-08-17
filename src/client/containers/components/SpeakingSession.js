@@ -7,6 +7,7 @@ import DraggableList from "react-draggable-list";
 import DraggableListItem from "./DraggableListItem";
 
 import {changeSessionData} from "client/actions";
+import {withRouter} from "react-router";
 
 import DateUtils from "utils/date";
 
@@ -39,7 +40,7 @@ class SpeakingSession extends Component{
     clearInterval(this.timer);
   }
   render(){
-    const {names, type, data} = this.props;
+    const {names, type, data, updateItem} = this.props;
     const {currentSpeaker, topic, speakers} = data;
     
     const {speakingTimerStr, timerStr, speakingTotalStr, totalStr} = {
@@ -226,6 +227,7 @@ class SpeakingSession extends Component{
                 list={speakers}
                 onMoveEnd={(newList) => this.setState({speakers: newList})}
                 container={() => container}
+                commonProps={{updateItem: updateItem}}
               
               />
             </div>
@@ -238,16 +240,17 @@ class SpeakingSession extends Component{
 }
 
 const createType = (name) => {
-  return connect(
-    (state) => ({
-      names: state.currState.delegates,
-      data: state.currState[name],
+  return withRouter(connect(
+    (state, ownProps) => ({
+      names: state.allStates[ownProps.match.params.id].delegates,
+      data: state.allStates[ownProps.match.params.id][name],
       type: name
     }),
-    (dispatch) => ({
-      changeState: (delta) => dispatch(changeSessionData(name, delta))
+    (dispatch, ownProps) => ({
+      changeState: (delta) => dispatch(changeSessionData(name, delta, ownProps.match.params.id)),
+      updateItem: (item, delta) => dispatch(updateItem(item, delta, ownProps.match.params.id))
     })
-  )(SpeakingSession);
+  )(SpeakingSession));
 }
 
 export const Moderated = createType("moderated");

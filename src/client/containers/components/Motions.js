@@ -1,5 +1,7 @@
 import React, {Component} from "react";
 
+import {withRouter} from "react-router";
+
 import {changeSessionData, setSession} from "client/actions";
 
 import {TextField, RadioGroup, FormControlLabel, Radio, Button} from "@material-ui/core";
@@ -129,14 +131,14 @@ class Motions extends Component{
   }
 }
 
-const MotionsConnector = connect(
-  (state) => ({
-    delegations: state.currState.delegates
+const MotionsConnector = withRouter(connect(
+  (state, ownProps) => ({
+    delegations: state.allStates[ownProps.match.params.id].delegates
   }),
-  (dispatch) => ({
-    changeState: (name, delta) => dispatch(changeSessionData(name, delta)),
-    setSession: (session) => dispatch(setSession(session))
+  (dispatch, ownProps) => ({
+    changeState: (name, delta) => dispatch(changeSessionData(name, delta, ownProps.match.params.id)),
+    setSession: (session) => dispatch(setSession(session, ownProps.match.params.id))
   })
-)(Motions);
+)(Motions));
 
 export default MotionsConnector;

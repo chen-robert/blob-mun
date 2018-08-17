@@ -1,14 +1,14 @@
 import {connect} from "react-redux";
-
+import {withRouter} from "react-router";
 import {toggleCollapse} from "client/actions";
 
 import Buttons from "./components/Buttons.js";
 
-const ButtonConnector = connect(
+const ButtonConnector = withRouter(connect(
   (state) => ({}),
-  (dispatch) => ({
-    toggleCollapse: () => dispatch(toggleCollapse()),
+  (dispatch, ownProps) => ({
+    toggleCollapse: () => dispatch(toggleCollapse(undefined, ownProps.match.params.id)),
   })
-)(Buttons);
+)(Buttons));
 
 export default ButtonConnector;

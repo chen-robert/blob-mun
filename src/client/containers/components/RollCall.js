@@ -1,7 +1,7 @@
 import React, {Component} from "react";
 
 import classNames from "classnames";
-
+import {withRouter} from "react-router";
 import {connect} from "react-redux";
 
 import {TextField} from "@material-ui/core";
@@ -102,16 +102,16 @@ class RollCall extends Component{
   }
 }
 
-const RollCallConnector = connect(
-  (state) => ({
-    delegates: state.currState.delegates,
-    present: state.currState.present
+const RollCallConnector = withRouter(connect(
+  (state, ownProps) => ({
+    delegates: state.allStates[ownProps.match.params.id].delegates,
+    present: state.allStates[ownProps.match.params.id].present
   }),
-  (dispatch) => ({
-    setPresent: (name, status) => dispatch(setPresent(name, status)),
-    removeDelegate: (name) => dispatch(removeDelegate(name)),
-    addDelegate: (name) => dispatch(addDelegate(name))
+  (dispatch, ownProps) => ({
+    setPresent: (name, status) => dispatch(setPresent(name, status, ownProps.match.params.id)),
+    removeDelegate: (name) => dispatch(removeDelegate(name, ownProps.match.params.id)),
+    addDelegate: (name) => dispatch(addDelegate(name, ownProps.match.params.id))
   })
-)(RollCall);
+)(RollCall));
 
 export default RollCallConnector;
