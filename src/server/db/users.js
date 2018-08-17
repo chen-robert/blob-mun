@@ -4,8 +4,7 @@ const Validator = {
   },
   checkLogin: (name, password, callback) => {
     callback();
-  }
-  
+  }  
 }
 
 export default Validator;

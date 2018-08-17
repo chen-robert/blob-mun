@@ -1,8 +1,9 @@
 import express from "express";
-import Joi from "joi";
 import path from "path";
 
 import Validator from "./db/users";
+import loginRoute from "./routes/login";
+import signupRoute from "./routes/login";
 
 const PORT = process.env.PORT || 3000;
 
@@ -15,48 +16,10 @@ app.use(express.urlencoded({
   extended: true
 }));
 
-const userSchema = Joi.object({
-  username: Joi.string().required(),
-  password: Joi.string().required()
-});
+app.post("/login", loginRoute);
 
-const signUpSchema = Joi.object({
-  username: Joi.string().required(),
-  email: Joi.string().email().required(),
-  password: Joi.string().required()
-})
+app.post("/signup", signupRoute);
 
-app.post("/login", (req, res) => {
-  const ret = Joi.validate(req.body, userSchema, {allowUnknown: false});
-  
-  if(ret.error){
-    return res.status(400).end(ret.error.toString());
-  }
-  const data = ret.value;
-  Validator.checkLogin(data.username, data.password, (error, data) => {
-    if(error){
-      return res.status(400).end(error);
-    }
-    return res.send("Login Successful");
-  });
-  
-});
-
-app.post("/signup", (req, res) => {
-  const ret = Joi.validate(req.body, signUpSchema, {allowUnknown: false});
-  
-  if(ret.error){
-    return res.status(400).end(ret.error.toString());
-  }
-  const data = ret.value;
-  Validator.addUser(data.username, data.email, data.password, (error, data) => {
-    if(error){
-      return res.status(400).end(error);
-    }
-    return res.send("Signup Successful");
-  });
-
-});
 
 app.get("/login", (req, res) => {
   res.sendFile(path.join(global.__rootdir, "dist/index.html"));
