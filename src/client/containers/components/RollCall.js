@@ -4,7 +4,8 @@ import classNames from "classnames";
 import {withRouter} from "react-router";
 import {connect} from "react-redux";
 
-import {TextField, FormGroup, FormControlLabel, Switch} from "@material-ui/core";
+import {TextField, FormGroup, FormControlLabel, Switch, Button} from "@material-ui/core";
+import AddIcon from "@material-ui/icons/Add";
 
 import {setPresent, removeDelegate, addDelegate} from "client/actions";
 
@@ -20,6 +21,16 @@ class RollCall extends Component{
   render(){
     const {delegates, present, setPresent, removeDelegate, addDelegate} = this.props;
     delegates.sort();
+    
+    const addDelegateWrapper = () => {      
+      const name = this.state.inputVal;
+      if(delegates.indexOf(name) === -1){
+        addDelegate(name);              
+      }else{
+        alert(`${name} is already a delegate!`);
+      }
+      this.setState({inputVal: ""});
+    }
     
     return (
     <div>
@@ -96,13 +107,7 @@ class RollCall extends Component{
         onKeyPress={
           (e) => {
             if(e.key === "Enter"){
-              const name = e.target.value;
-              if(delegates.indexOf(name) === -1){
-                addDelegate(name);              
-              }else{
-                alert(`${name} is already a delegate!`);
-              }
-              this.setState({inputVal: ""});
+              addDelegateWrapper();
             }
           }
         }

@@ -31,7 +31,7 @@ const allowOverflow = {
 }
 
 const MUN = ({collapsed, currSession, unCollapse, setState}) => {
-  return <div>
+  return <div style={{height: "100%"}}>
     <div id="main-content" 
       onClick={() => unCollapse()}
       className={
