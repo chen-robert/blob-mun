@@ -1,7 +1,7 @@
 const initialState = {
   generic: {
     id: "LOL",
-    delegates: ["Democratic Republic Of Congo", "Joe", "Samuel", "Johns"],
+    delegates: [],
     present: {},
     committeeName: "Blob Mun",
     sessionName: "Roll Call",
@@ -23,13 +23,6 @@ const initialState = {
 const rooms = ["moderated", "unmoderated", "primarySpeakers", "secondarySpeakers"];
 rooms.forEach((name) => {
   initialState.generic[name] = {...initialState.generic.genericRoom}
-});
-
-for(var i = 0; i < 26; i++){
-  initialState.generic.delegates.push("Bob" + i)
-}
-initialState.generic.delegates.forEach((name) => {
-  initialState.generic.present[name] = "PRESENT";
 });
 
 initialState.allStates[initialState.generic.id] = {...initialState.generic};

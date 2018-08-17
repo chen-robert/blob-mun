@@ -4,7 +4,7 @@ import classNames from "classnames";
 import {withRouter} from "react-router";
 import {connect} from "react-redux";
 
-import {TextField} from "@material-ui/core";
+import {TextField, FormGroup, FormControlLabel, Switch} from "@material-ui/core";
 
 import {setPresent, removeDelegate, addDelegate} from "client/actions";
 
@@ -13,7 +13,8 @@ class RollCall extends Component{
     super(props);
     
     this.state = {
-      inputVal: ""
+      inputVal: "",
+      validate: true
     }
   }
   render(){
@@ -22,6 +23,17 @@ class RollCall extends Component{
     
     return (
     <div>
+      <FormGroup row>
+        <FormControlLabel
+          control={
+            <Switch
+              checked={this.state.validate}
+              onChange={(e) => this.setState({validate: e.target.checked})}
+            />
+          }
+          label="Warn on remove user"
+        />
+      </FormGroup>
       <table className="table content">
         <thead>
           <tr>
@@ -49,7 +61,7 @@ class RollCall extends Component{
                 className="hover-red"
                 onClick={
                   () => {
-                    if(confirm(`Remove ${name}?`))removeDelegate(name);
+                    if(!this.state.validate || confirm(`Remove ${name}?`))removeDelegate(name);
                   }
                 }
                 >{name}</td>

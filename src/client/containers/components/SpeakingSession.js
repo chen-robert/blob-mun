@@ -6,7 +6,7 @@ import classNames from "classnames";
 import DraggableList from "react-draggable-list";
 import DraggableListItem from "./DraggableListItem";
 
-import {changeSessionData} from "client/actions";
+import {changeSessionData, updateItem} from "client/actions";
 import {withRouter} from "react-router";
 
 import DateUtils from "utils/date";
