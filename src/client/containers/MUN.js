@@ -1,17 +1,11 @@
 import React from "react";
-
 import classNames from "classnames";
-
 import {Grid, Card, CardContent} from "@material-ui/core"
-
 import {connect} from "react-redux";
 import {withRouter} from "react-router";
-
-import {toggleCollapse} from "client/actions";
-
+import {toggleCollapse, setCommitteeName} from "client/actions";
 import Header from "./HeaderConnector";
 import Buttons from "./ButtonConnector";
-
 import RollCall from "./components/RollCall";
 import Motions from "./components/Motions";
 import SideBar from "./components/SideBar";
@@ -30,7 +24,7 @@ const allowOverflow = {
   overflow: "visible"
 }
 
-const MUN = ({collapsed, currSession, unCollapse, setState}) => {
+const MUN = ({collapsed, currSession, unCollapse, setState, setCommitteeName}) => {
   return <div style={{height: "100%"}}>
     <div id="main-content" 
       onClick={() => unCollapse()}
@@ -40,7 +34,9 @@ const MUN = ({collapsed, currSession, unCollapse, setState}) => {
         })
       }
     >
-      <Header />
+      <Header
+        setCommitteeName={setCommitteeName}
+      />
       <div className="header-padding" />
       <div className="centered-parent">
         <Card className="centered" style={allowOverflow}>
@@ -52,7 +48,7 @@ const MUN = ({collapsed, currSession, unCollapse, setState}) => {
         </Card>
       </div>
     </div>
-    <div id="side-bar" className={
+    <div id="sidebar" className={
         classNames({
           "collapsed": !collapsed
         })
@@ -71,7 +67,8 @@ const MUNConnector = withRouter(connect(
     currSession: state.allStates[ownProps.match.params.id].sessionName
   }),
   (dispatch, ownProps) => ({
-    unCollapse: () => dispatch(toggleCollapse(false, ownProps.match.params.id))
+    unCollapse: () => dispatch(toggleCollapse(false, ownProps.match.params.id)),
+    setCommitteeName: (name) => dispatch(setCommitteeName(name, ownProps.match.params.id))
   })
 )(MUN));
 

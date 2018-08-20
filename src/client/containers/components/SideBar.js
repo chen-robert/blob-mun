@@ -2,29 +2,31 @@ import React from "react";
 import classNames from "classnames";
 import {withRouter} from "react-router";
 import {connect} from "react-redux";
+import {List, ListItem, ListItemText} from "@material-ui/core";
 
 import {setSession} from "client/actions";
 
 const SideBar = ({names, currSession, setSession}) => {
-  return <ul>
+  return <List component="nav" className="sidebar-list">
   {
     names.map((name) => {
-      return <li 
+      return <ListItem button
       onClick={
         () => setSession(name)
       }
       key={name}
       className={
         classNames({
+          "sidebar-item": true,
           "toggled": name === currSession
         })
       }
       >
-        {name}
-      </li>
+        <ListItemText primary={name}/>
+      </ListItem>
     })
   }
-  </ul>
+  </List>
 }
 const SideBarConnector = withRouter(connect(
   (state, ownProps) => ({

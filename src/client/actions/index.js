@@ -1,4 +1,5 @@
 export const addDelegate = (name, id) => {
+  name = name.trim();
   return {
     type: "ADD_DELEGATE",
     name,
@@ -51,6 +52,14 @@ export const updateItem = (item, delta, id) => {
 export const removeDelegate = (name, id) => {
   return {
     type: "REMOVE_DELEGATE",
+    name,
+    id
+  }
+}
+
+export const setCommitteeName = (name, id) => {
+  return {
+    type: "SET_COMMITTEE_NAME",
     name,
     id
   }

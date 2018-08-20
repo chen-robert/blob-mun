@@ -20,10 +20,9 @@ class RollCall extends Component{
   }
   render(){
     const {delegates, present, setPresent, removeDelegate, addDelegate} = this.props;
-    delegates.sort();
     
     const addDelegateWrapper = () => {      
-      const name = this.state.inputVal;
+      const name = this.state.inputVal.trim();
       if(delegates.indexOf(name) === -1){
         addDelegate(name);              
       }else{

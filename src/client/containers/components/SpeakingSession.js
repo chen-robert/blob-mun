@@ -84,7 +84,12 @@ class SpeakingSession extends Component{
     let container;
     
     return <div className="content">
-      <div className={"content-banner " + shouldDisplay("UM")}>{topic || "Unknown Topic"}</div>
+      <div 
+        className={"content-banner " + shouldDisplay("UM")}
+        onClick={() => this.setState({topic: prompt("Speaking topic")})}
+      >
+        {topic || "Unknown Topic"}
+      </div>
       <Grid container spacing={16}>
         <Grid item xs={3}>
           <div>
@@ -189,7 +194,8 @@ class SpeakingSession extends Component{
                 timer: 0
               })
             }
-            variant="contained">
+            variant="contained"
+            >
               Clear
             </Button>
             <div style={{height: "10px"}}/>

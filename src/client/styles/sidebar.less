@@ -6,7 +6,7 @@
 
 @link-height: 50px;
 
-#side-bar{
+#sidebar{
   transition-duration: @transition-duration;
   
   position: absolute;
@@ -25,20 +25,18 @@
   box-shadow: 8px 0 25px -3px rgba(0,0,0,0.4) inset;
   height: 100%;
 }
-#side-bar ul{
+#sidebar .sidebar-list{
   list-style-type: none;
   padding: 0;
   margin: 0;
   
   transform: translateY(calc(-@link-height));
 }
-#side-bar li{
+#sidebar .sidebar-item{
   cursor: pointer;
   
   height: @link-height;
   line-height: @link-height;
-  
-  padding-left: 35px;
   
   transition: 150ms background-color;
   &.toggled{

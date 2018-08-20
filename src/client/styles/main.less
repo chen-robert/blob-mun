@@ -7,8 +7,8 @@
 @import "rollcall";
 
 @banner-height: @link-height;
-
 @header-height: 120px;
+@committee-padding: 25px;
 @spacing: 50px;
 
 @button-padding: 5px;
@@ -41,6 +41,15 @@ html, body{
 
 #committee-name{
   text-align: center;
+  
+  height: calc(@header-height - @banner-height - @committee-padding);
+  padding-top: @committee-padding;
+  margin: 0;
+  
+  background-color: white;
+  &:hover{
+    background-color: darken(white, @small-shade);
+  }
 }
 
 #session-name{
@@ -69,8 +78,14 @@ html, body{
 
 .sidebar-button{
   position: absolute;
-  right: @button-padding;
   top: @button-padding;
+  
+  &.left{
+    left: @button-padding;
+  }
+  &.right{
+    right: @button-padding;
+  }
 }
 
 .header-padding{
@@ -90,6 +105,10 @@ html, body{
   
   font-size: 1.3em;
   padding: 5px;
+  
+  &:hover{
+    background-color: darken(@light-blue, @small-shade);
+  }
 }
 
 .content, .content-parent{

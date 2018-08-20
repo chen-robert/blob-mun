@@ -5,6 +5,7 @@ import {Provider} from "react-redux";
 import {BrowserRouter} from "react-router-dom";
 
 import App from "./containers/App.js";
+import ServerUpdater from "./ServerUpdater";
 
 import reducer from "./reducers";
 
@@ -27,3 +28,5 @@ const render = () => ReactDOM.render(
 
 render();
 store.subscribe(render);
+
+setInterval(() => ServerUpdater.updateServer(store.getState()), 5000);
