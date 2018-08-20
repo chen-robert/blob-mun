@@ -54,12 +54,13 @@ class SpeakingSession extends Component{
     const codeToName = {
       "U": "unmoderated",
       "M": "moderated",
-      "P": "primarySpeakers",
-      "S": "secondarySpeakers"
+      //Use the same code because they are all the same
+      "P": "primarySpeakers | secondarySpeakers | singleSpeaker",
+      "S": ""
     }
     const isCode = (code) => {
       for(var i = 0; i < code.length; i++){
-        if(type === codeToName[code.charAt(i)]){
+        if(codeToName[code.charAt(i)].split(" | ").indexOf(type) !== -1){
           return true;
         }
       }
@@ -166,8 +167,13 @@ class SpeakingSession extends Component{
         
         <Grid item xs={3} className={shouldDisplay("MPS")}>
           <div className={shouldDisplay("M")}>
-            <DelegateTable names={names}
-              onClick={(name) => this.setState({currentSpeaker: name, speakingTimer: 0})}
+            <Select
+              placeholder="Delegation"
+              isSearchable={true}
+              options={names.map((name) => ({value: name, label: name}))}
+              onChange={
+                (e) => this.setState({currentSpeaker: e.value, speakingTimer: 0})
+              }
             />
           </div>
           <div className={shouldDisplay("PS")}>
@@ -238,9 +244,7 @@ const createType = (name) => {
 }
 
 export const Moderated = createType("moderated");
-
 export const Unmoderated = createType("unmoderated");
-
 export const PrimarySpeakersList = createType("primarySpeakers");
-
 export const SecondarySpeakersList = createType("secondarySpeakers");
+export const SingleSpeaker = createType("singleSpeaker");

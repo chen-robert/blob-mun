@@ -9,13 +9,14 @@ import Buttons from "./ButtonConnector";
 import RollCall from "./components/RollCall";
 import Motions from "./components/Motions";
 import SideBar from "./components/SideBar";
-import {Moderated, Unmoderated, PrimarySpeakersList, SecondarySpeakersList} from "./components/SpeakingSession";
+import {Moderated, Unmoderated, PrimarySpeakersList, SecondarySpeakersList, SingleSpeaker} from "./components/SpeakingSession";
 
 const nameToJSX = {
   "Roll Call": <RollCall/>,
   "Motions": <Motions/>,
   "Primary Speakers List": <PrimarySpeakersList/>,
   "Secondary Speakers List": <SecondarySpeakersList/>,
+  "Single Speaker": <SingleSpeaker/>,
   "Moderated Caucus": <Moderated/>,
   "Unmoderated Caucus": <Unmoderated/>
 }

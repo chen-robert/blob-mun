@@ -22,7 +22,7 @@ const initialState = {
   allStates: {}
 };
 
-const rooms = ["moderated", "unmoderated", "primarySpeakers", "secondarySpeakers"];
+const rooms = ["moderated", "unmoderated", "primarySpeakers", "secondarySpeakers", "singleSpeaker"];
 rooms.forEach((name) => {
   initialState.generic[name] = {...initialState.generic.genericRoom}
 });
