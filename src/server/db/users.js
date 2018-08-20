@@ -1,9 +1,9 @@
 const Validator = {
   addUser: (name, email, password, callback) => {
-    callback();
+    callbac();
   },
   checkLogin: (name, password, callback) => {
-    callback();
+    callback(null, {id: 1});
   }  
 }
 

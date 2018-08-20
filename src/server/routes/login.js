@@ -1,4 +1,6 @@
 import Joi from "joi";
+import Validator from "server/db/users";
+import SessionManager from "server/users/SessionManager";
 
 const userSchema = Joi.object({
   username: Joi.string().required(),
@@ -16,6 +18,9 @@ const loginRoute = (req, res) => {
     if(error){
       return res.status(400).end(error);
     }
+    const sessId = SessionManager.generateSessId(data.id);
+    
+    res.cookie("sessId", sessId, {maxAge: 9e5, httpOnly: true});
     return res.send("Login Successful");
   });
   

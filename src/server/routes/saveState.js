@@ -9,7 +9,8 @@ const saveStateSchema = Joi.object({
 });
 
 const saveStateRoute = (req, res) => {
-  const ret = Joi.validate(req.body, saveStateSchema, {allowUnknown: false});
+  const combined = Object.assign({}, req.cookies, req.body);
+  const ret = Joi.validate(combined, saveStateSchema, {allowUnknown: false});
   
   if(ret.error){
     return res.status(400).end(ret.error.toString());

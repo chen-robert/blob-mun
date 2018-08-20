@@ -1,4 +1,5 @@
 import Joi from "joi";
+import Validator from "server/db/users";
 
 const signUpSchema = Joi.object({
   username: Joi.string().required(),
