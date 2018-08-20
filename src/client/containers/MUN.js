@@ -3,7 +3,7 @@ import classNames from "classnames";
 import {Grid, Card, CardContent} from "@material-ui/core"
 import {connect} from "react-redux";
 import {withRouter} from "react-router";
-import {toggleCollapse, setCommitteeName} from "client/actions";
+import {toggleCollapse, setCommitteeName, setSession} from "client/actions";
 import Header from "./components/Header";
 import Buttons from "./components/Buttons";
 import RollCall from "./components/RollCall";
@@ -16,8 +16,8 @@ const allowOverflow = {
   overflow: "visible"
 }
 
-const MUN = ({currState, unCollapse, setCommitteeName}) => {
-  const {collapsed, sessionName} = currState;
+const MUN = ({currState, toggleCollapse, setCommitteeName, setSession}) => {
+  const {collapsed, sessionName, committeeName} = currState;
   const nameToJSX = {
     "Roll Call": <RollCall/>,
     "Motions": <Motions/>,
@@ -30,7 +30,7 @@ const MUN = ({currState, unCollapse, setCommitteeName}) => {
   }
   return <div style={{height: "100%"}}>
     <div id="main-content" 
-      onClick={() => unCollapse()}
+      onClick={() => toggleCollapse(false)}
       className={
         classNames({
           "collapsed": collapsed
@@ -38,6 +38,8 @@ const MUN = ({currState, unCollapse, setCommitteeName}) => {
       }
     >
       <Header
+        committeeName={committeeName}
+        sessionName={sessionName}
         setCommitteeName={setCommitteeName}
       />
       <div className="header-padding" />
@@ -57,9 +59,15 @@ const MUN = ({currState, unCollapse, setCommitteeName}) => {
         })
       }>
       <div className="header-padding" />
-      <SideBar names={Object.keys(nameToJSX)}/>
+      <SideBar 
+        names={Object.keys(nameToJSX)}
+        currSession={sessionName}
+        setSession={setSession}
+      />
     </div>
-    <Buttons />
+    <Buttons 
+      toggleCollapse={() => toggleCollapse()}
+    />
   
   </div>;
 }
@@ -69,8 +77,9 @@ const MUNConnector = withRouter(connect(
     currState: state.allStates[ownProps.match.params.id]
   }),
   (dispatch, ownProps) => ({
-    unCollapse: () => dispatch(toggleCollapse(false, ownProps.match.params.id)),
-    setCommitteeName: (name) => dispatch(setCommitteeName(name, ownProps.match.params.id))
+    toggleCollapse: (val) => dispatch(toggleCollapse(val, ownProps.match.params.id)),
+    setCommitteeName: (name) => dispatch(setCommitteeName(name, ownProps.match.params.id)),
+    setSession: (session) => dispatch(setSession(session, ownProps.match.params.id))
   })
 )(MUN));
 

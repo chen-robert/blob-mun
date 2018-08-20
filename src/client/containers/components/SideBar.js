@@ -28,13 +28,5 @@ const SideBar = ({names, currSession, setSession}) => {
   }
   </List>
 }
-const SideBarConnector = withRouter(connect(
-  (state, ownProps) => ({
-    currSession: state.allStates[ownProps.match.params.id].sessionName
-  }),
-  (dispatch, ownProps) => ({
-    setSession: (session) => dispatch(setSession(session, ownProps.match.params.id))
-  })
-)(SideBar));
 
-export default SideBarConnector;
+export default SideBar;

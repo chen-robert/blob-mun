@@ -35,11 +35,4 @@ const Buttons = ({toggleCollapse}) => {
   );
 }
 
-const ButtonConnector = withRouter(connect(
-  (state) => ({}),
-  (dispatch, ownProps) => ({
-    toggleCollapse: () => dispatch(toggleCollapse(undefined, ownProps.match.params.id)),
-  })
-)(Buttons));
-
-export default ButtonConnector;
+export default Buttons;

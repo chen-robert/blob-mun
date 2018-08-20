@@ -6,7 +6,7 @@ const initialState = {
     delegates: [],
     present: {},
     committeeName: "Blob Mun",
-    sessionName: "Statistics",
+    sessionName: "Roll Call",
     collapsed: false,
     speakingStats: {},
     genericRoom: {

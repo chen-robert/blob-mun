@@ -11,7 +11,7 @@ import {CssBaseline} from "@material-ui/core";
 
 const App = () => {
   return (
-  <div>
+  <div style={{height: "100%"}}>
     <CssBaseline/>
     <Switch>
       <Route exact path="/" component={Info}/>
