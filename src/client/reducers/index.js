@@ -1,4 +1,4 @@
-import applyToState from "./applyToState";
+import applyToState, {rooms} from "./applyToState";
 
 const initialState = {
   generic: {
@@ -6,8 +6,9 @@ const initialState = {
     delegates: [],
     present: {},
     committeeName: "Blob Mun",
-    sessionName: "Roll Call",
+    sessionName: "Statistics",
     collapsed: false,
+    speakingStats: {},
     genericRoom: {
       timer: 0,
       speakingTimer: 0,
@@ -22,7 +23,6 @@ const initialState = {
   allStates: {}
 };
 
-const rooms = ["moderated", "unmoderated", "primarySpeakers", "secondarySpeakers", "singleSpeaker"];
 rooms.forEach((name) => {
   initialState.generic[name] = {...initialState.generic.genericRoom}
 });

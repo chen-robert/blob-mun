@@ -25,8 +25,8 @@ class SpeakingSession extends Component{
       const {data} = this.props;
       if(!data.paused){
         this.setState({
-          timer: data.timer + granularity,
-          speakingTimer: data.speakingTimer + granularity
+          type: "UPDATE_TIMER",
+          granularity
         })        
       }
     }

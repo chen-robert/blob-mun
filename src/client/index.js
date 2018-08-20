@@ -3,15 +3,11 @@ import ReactDOM from "react-dom";
 import {createStore} from "redux";
 import {Provider} from "react-redux";
 import {BrowserRouter} from "react-router-dom";
-
 import App from "./containers/App.js";
 import ServerUpdater from "./ServerUpdater";
-
 import reducer from "./reducers";
-
 import "./styles/main.less";
 import "./styles/login.less";
-
 import "typeface-roboto";
 
 import incrementTimer from "client/actions";
@@ -29,4 +25,4 @@ const render = () => ReactDOM.render(
 render();
 store.subscribe(render);
 
-setInterval(() => ServerUpdater.updateServer(store.getState()), 5000);
+setInterval(() => ServerUpdater.updateServer(store.getState()), 10000000);

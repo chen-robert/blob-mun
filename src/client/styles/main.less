@@ -5,6 +5,7 @@
 @import "colors";
 @import "speakers";
 @import "rollcall";
+@import "stats";
 
 @banner-height: @link-height;
 @header-height: 120px;
@@ -42,7 +43,7 @@ html, body{
 #committee-name{
   text-align: center;
   
-  height: calc(@header-height - @banner-height - @committee-padding);
+  height: calc(@header-height - @banner-height);
   padding-top: @committee-padding;
   margin: 0;
   

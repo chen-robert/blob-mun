@@ -8,7 +8,14 @@ const Header = ({committeeName, sessionName, toggleCollapse, setCommitteeName}) 
   return <div id="header">
     <h3 
     id="committee-name"
-    onClick={() => setCommitteeName(prompt("Committee Name"))}
+    onClick={
+      () => {
+        const name = prompt("Committee Name").trim();
+        if(name){
+          setCommitteeName(name);
+        }
+      }
+    }
     >{committeeName}</h3>
     <div id="session-name">
       {sessionName}

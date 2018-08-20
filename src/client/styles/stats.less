@@ -1,0 +1,21 @@
+@bar-height: 8px;
+@stats-text-width: 20%;
+
+.stats-bar{
+  width: calc(100% - @stats-text-width);
+  height: @bar-height;
+  display: inline-block;
+}
+.stats-text{
+  width: @stats-text-width;
+  display: inline-block;
+  word-wrap: break-word;
+}
+.stats-part{
+  height: @bar-height;
+  display: inline-block;
+
+}
+.stats-wrapper{
+  text-align: left;
+}

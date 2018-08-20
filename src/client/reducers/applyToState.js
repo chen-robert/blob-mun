@@ -1,3 +1,9 @@
+import SpeakingStats from "./SpeakingStats";
+
+export const rooms = ["moderated", "unmoderated", "primarySpeakers", "secondarySpeakers", "singleSpeaker"];
+
+const speakingStats = new SpeakingStats(rooms);
+
 const applyToState = (state, action) => {
   switch (action.type) {
     case "ADD_DELEGATE":
@@ -17,8 +23,22 @@ const applyToState = (state, action) => {
     case "SET_SESSION":
       return {...state, sessionName: action.session};
     case "CHANGE_SESS":
-      const newSessData = Object.assign({}, state[action.name], action.delta);
-      return {...state, [action.name]: newSessData};
+      let delta = action.delta;
+      let newSpeakingStats = state.speakingStats;
+      switch(action.delta.type){
+        case "UPDATE_TIMER":
+          delta = {
+            timer: state[action.name].timer + action.delta.granularity,
+            speakingTimer: state[action.name].speakingTimer + action.delta.granularity
+          }
+          
+          const currentRoom = state[action.name];
+          newSpeakingStats = speakingStats.applyDelta(state.speakingStats, 
+            currentRoom.currentSpeaker, action.name, action.delta.granularity);
+          break;
+      }
+      const newSessData = Object.assign({}, state[action.name], delta);
+      return {...state, [action.name]: newSessData, speakingStats: newSpeakingStats};
     case "UPDATE_ITEM":
       let ret = state;
       rooms.forEach((room) => {
