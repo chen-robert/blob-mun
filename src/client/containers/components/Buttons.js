@@ -1,5 +1,7 @@
 import React from "react";
-
+import {connect} from "react-redux";
+import {withRouter} from "react-router";
+import {toggleCollapse} from "client/actions";
 import {Button, Icon} from "@material-ui/core";
 
 const Buttons = ({toggleCollapse}) => {
@@ -33,4 +35,11 @@ const Buttons = ({toggleCollapse}) => {
   );
 }
 
-export default Buttons;
+const ButtonConnector = withRouter(connect(
+  (state) => ({}),
+  (dispatch, ownProps) => ({
+    toggleCollapse: () => dispatch(toggleCollapse(undefined, ownProps.match.params.id)),
+  })
+)(Buttons));
+
+export default ButtonConnector;
