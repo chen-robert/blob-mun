@@ -17,7 +17,7 @@ const allowOverflow = {
 }
 
 const MUN = ({currState, toggleCollapse, setCommitteeName, setSession}) => {
-  const {collapsed, sessionName, committeeName} = currState;
+  const {collapsed, sessionName, committeeName, speakingStats} = currState;
   const nameToJSX = {
     "Roll Call": <RollCall/>,
     "Motions": <Motions/>,
@@ -26,7 +26,7 @@ const MUN = ({currState, toggleCollapse, setCommitteeName, setSession}) => {
     "Single Speaker": <SingleSpeaker/>,
     "Moderated Caucus": <Moderated/>,
     "Unmoderated Caucus": <Unmoderated/>,
-    "Statistics": <Statistics stats={currState.speakingStats}/>
+    "Statistics": <Statistics stats={speakingStats}/>
   }
   return <div style={{height: "100%"}}>
     <div id="main-content" 

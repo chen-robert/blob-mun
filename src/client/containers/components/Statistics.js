@@ -15,6 +15,9 @@ const Statistics = ({stats}) => {
   return (
   <div className="content" style={{overflowY: "auto"}}>
   { 
+    sortedByTime.length === 0 || total === 0? 
+    <Typography component="p">Looks like nobody has spoke yet!</Typography>
+    : 
     sortedByTime.map((name) => {
       const stat = stats[name];
       return (

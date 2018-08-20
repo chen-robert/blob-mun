@@ -9,6 +9,7 @@ class SpeakingStats{
     dataObj[name] = data;
   }
   applyDelta(dataObj, name, room, delta){
+    if(!name)return dataObj;
     if(!dataObj.hasOwnProperty(name))this.initName(dataObj, name);
     
     const newTime = dataObj[name][room] + delta;
