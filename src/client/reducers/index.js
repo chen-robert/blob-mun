@@ -22,7 +22,11 @@ const initialState = {
   },
   allStates: {}
 };
-
+for(var i = 0; i < 10; i++){
+  const ret = {};
+  rooms.forEach((room) => ret[room] = 10 ** Math.random());
+  initialState.generic.speakingStats["Bob" + i] = ret;
+}
 rooms.forEach((name) => {
   initialState.generic[name] = {...initialState.generic.genericRoom}
 });

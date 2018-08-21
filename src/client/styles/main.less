@@ -6,6 +6,7 @@
 @import "speakers";
 @import "rollcall";
 @import "stats";
+@import "pie";
 
 @banner-height: @link-height;
 @header-height: 120px;
@@ -50,6 +51,9 @@ html, body{
   background-color: white;
   &:hover{
     background-color: darken(white, @small-shade);
+  }
+  & h3{
+    margin: 0;
   }
 }
 

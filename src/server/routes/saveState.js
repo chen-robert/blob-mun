@@ -23,7 +23,7 @@ const saveStateRoute = (req, res) => {
       if(error)return res.status(400).end(error);
       
       return res.send("Signup Successful");
-    }
+    });
     
   }else{
     return res.status(400).end("Invalid Session");

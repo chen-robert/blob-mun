@@ -6,8 +6,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "webpack-dev-server",
-    "build": "webpack --mode production",
-    "build-watch": "webpack --watch",
+    "build": "webpack --config webpack.production.config.js --progress",
+    "build-watch": "webpack --watch --progress",
     "server": "nodemon --exec babel-node app.js --watch src/server"
   },
   "author": "Robert Chen",
@@ -16,6 +16,8 @@
     "@material-ui/core": "^1.4.2",
     "@material-ui/icons": "^2.0.0",
     "axios": "^0.18.0",
+    "compression": "^1.7.3",
+    "cookie-parser": "^1.4.3",
     "express": "^4.16.3",
     "express-session": "^1.15.6",
     "joi": "^13.6.0",
@@ -38,6 +40,7 @@
     "babel-cli": "^6.26.0",
     "babel-core": "^6.26.3",
     "babel-loader": "^7.1.5",
+    "babel-plugin-resolver": "^1.1.0",
     "babel-plugin-transform-object-rest-spread": "^6.26.0",
     "babel-preset-env": "^1.7.0",
     "babel-preset-react": "^6.24.1",
@@ -45,6 +48,7 @@
     "file-loader": "^1.1.11",
     "less-loader": "^4.1.0",
     "nodemon": "^1.18.3",
-    "style-loader": "^0.21.0"
+    "style-loader": "^0.21.0",
+    "webpack-bundle-analyzer": "^2.13.1"
   }
 }

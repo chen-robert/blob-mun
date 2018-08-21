@@ -1,10 +1,11 @@
 import React from "react";
 import {connect} from "react-redux";
 import {withRouter} from "react-router";
+import HeadCount from "./HeadCount";
 
 const Header = ({committeeName, sessionName, setCommitteeName}) => {
   return <div id="header">
-    <h3 
+    <div
     id="committee-name"
     onClick={
       () => {
@@ -14,7 +15,11 @@ const Header = ({committeeName, sessionName, setCommitteeName}) => {
         }
       }
     }
-    >{committeeName}</h3>
+    >
+      <h3>{committeeName}</h3>
+      <HeadCount count={12}/>
+    </div>
+    
     <div id="session-name">
       {sessionName}
     </div>

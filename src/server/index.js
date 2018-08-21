@@ -1,5 +1,7 @@
 import express from "express";
+import cookieParser from "cookie-parser";
 import path from "path";
+import compression from "compression";
 
 import loginRoute from "./routes/login";
 import signupRoute from "./routes/signup";
@@ -9,8 +11,9 @@ const PORT = process.env.PORT || 3000;
 
 const app = express();
 
+app.use(compression());
 app.use(express.json());
-app.use(express.cookieParser());
+app.use(cookieParser());
 app.use(express.urlencoded({
   extended: true
 }));

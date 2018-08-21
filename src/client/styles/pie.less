@@ -1,0 +1,25 @@
+@import "colors";
+
+.pie{
+  width: 10px;
+  height: 10px;
+  display: inline-block;
+  border-radius: 50%;
+  background-color: @nice-blue;
+  border: 1px solid green;
+  
+  margin: 3px;
+  margin-bottom: 0;
+
+  &.twothirds {
+    background-image: linear-gradient(calc(180deg - 30deg), transparent 50%, @nice-blue 50%), 
+      linear-gradient(90deg, white 50%, transparent 50%);
+  }
+  &.half{
+    background-image: linear-gradient(90deg, white 50%, transparent 50%);
+  }
+}
+
+.pie-text{
+  font-size: 0.8em;
+}

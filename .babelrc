@@ -1,8 +1,4 @@
 {
   "presets": ["env", "react"],
-  "plugins": ["transform-object-rest-spread", 
-    /*
-    ["resolver", {"resolveDirs": ["src"]}]
-    */
-  ]
+  "plugins": ["transform-object-rest-spread", ["resolver", {"resolveDirs": ["src"]}]]
 }
