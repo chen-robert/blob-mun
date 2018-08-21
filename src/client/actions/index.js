@@ -64,3 +64,10 @@ export const setCommitteeName = (name, id) => {
     id
   }
 }
+
+export const clearSpeakingData = (id) => {
+  return {
+    type: "CLEAR_SPEAKING_DATA",
+    id
+  }
+}

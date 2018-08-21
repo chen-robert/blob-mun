@@ -76,6 +76,10 @@ const applyToState = (state, action) => {
       return {...state,
         committeeName: action.name
       };
+    case "CLEAR_SPEAKING_DATA":
+      return {...state,
+        speakingStats: {}
+      }
     default:
       return state;
   }
