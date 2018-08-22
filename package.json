@@ -10,7 +10,7 @@
     "build-watch": "webpack --watch --progress",
     "server": "nodemon --exec babel-node app.js --watch src/server",
     "db:init": "babel-node src/server/db/init",
-    "start": "npm run build && npm run server"
+    "start": "concurrently \"npm run build\" \"npm run server\""
   },
   "author": "Robert Chen",
   "repository": "https://github.com/chen-robert/blob-mun.git",
