@@ -8,7 +8,9 @@
     "dev": "webpack-dev-server",
     "build": "webpack --config webpack.production.config.js --progress",
     "build-watch": "webpack --watch --progress",
-    "server": "nodemon --exec babel-node app.js --watch src/server"
+    "server": "nodemon --exec babel-node app.js --watch src/server",
+    "db:init": "node src/server/db/init",
+    "start": "npm run build && npm run server"
   },
   "author": "Robert Chen",
   "repository": "https://github.com/chen-robert/blob-mun.git",
@@ -49,7 +51,6 @@
     "file-loader": "^1.1.11",
     "less-loader": "^4.1.0",
     "nodemon": "^1.18.3",
-    "style-loader": "^0.21.0",
-    "webpack-bundle-analyzer": "^2.13.1"
+    "style-loader": "^0.21.0"
   }
 }
