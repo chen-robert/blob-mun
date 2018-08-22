@@ -22,7 +22,7 @@ const Info = ({history}) => {
           </Typography>
         </CardContent>
         <CardActions>
-          <Button onClick={() => history.push("/dashboard")}>Dashboard</Button>
+          <Button onClick={() => window.location = "/dashboard"}>Dashboard</Button>
         </CardActions>
       </Card>
     </Grid>
