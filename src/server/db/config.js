@@ -1,0 +1,1 @@
+export const connectionString = process.env.DATABASE_URL || "postgresql://postgres:nike@localhost:5432/postgres";

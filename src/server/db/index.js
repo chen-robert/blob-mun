@@ -1,7 +1,7 @@
 import {Client} from "pg";
 import bcrypt from "bcrypt";
+import {connectionString} from "./config";
 
-const connectionString = "postgresql://postgres:nike@localhost:5432/postgres";
 const client = new Client({connectionString});
 client.connect();
 

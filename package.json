@@ -9,7 +9,7 @@
     "build": "webpack --config webpack.production.config.js --progress",
     "build-watch": "webpack --watch --progress",
     "server": "nodemon --exec babel-node app.js --watch src/server",
-    "db:init": "node src/server/db/init",
+    "db:init": "babel-node src/server/db/init",
     "start": "npm run build && npm run server"
   },
   "author": "Robert Chen",

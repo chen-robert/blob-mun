@@ -1,8 +1,8 @@
-const pg = require("pg");
-const async = require("async");
+import {Client} from "pg";
+import async from "async";
+import {connectionString} from "./config";
 
-const connectionString = "postgresql://postgres:nike@localhost:5432/postgres";
-const client = new pg.Client({connectionString});
+const client = new Client({connectionString});
 client.connect();
 
 const queries = [
