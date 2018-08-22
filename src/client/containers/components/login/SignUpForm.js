@@ -25,7 +25,7 @@ class SignUpForm extends Component{
             popup(res.data, true);
             switchToLogin();
           })
-          .catch((err) => popup(err.data, false));
+          .catch((err) => popup(err.response.data, false));
       }
     }>
         <div>
@@ -37,7 +37,7 @@ class SignUpForm extends Component{
           onChange={(e) => this.setState({email: e.target.value})}/>
         </div>
         <div>
-          <TextField fullWidth required name="password" label="Password" placeholder="Password"
+          <TextField fullWidth required type="password" name="password" label="Password" placeholder="Password"
           onChange={(e) => this.setState({password: e.target.value})}/>
         </div>
         <div style={{height: "10px"}}/>

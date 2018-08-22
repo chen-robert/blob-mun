@@ -8,17 +8,21 @@ class SessionManager {
     }
   }
   generateSessId(id) {
+    const {sessToId, idToSess} = this.state;
     if(idToSess.has(id))return idToSess.get(id);
-    const sessId = generateId();
+    const sessId = this.generateId();
+    
     
     idToSess.set(id, sessId);
     sessToId.set(sessId, id);
+    
+    return sessId;
   }
   getIdFromSess(sessId) {
-    return sessToId.get(sessId);
+    return this.state.sessToId.get(sessId);
   }
-  generateId(size=256){
-    return crypto.randomBytes(size).toString("base64");
+  generateId(size=32){
+    return crypto.randomBytes(size).toString("hex");
   }
 }
 

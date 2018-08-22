@@ -10,10 +10,16 @@ class ServerUpdater{
     if(this.state.prevState !== state){
       axios.post("/save", {
         state: JSON.stringify(state)
-      }).catch((error) => console.error(error));
+      })
+      .then(() => console.log("Saved"))
+      .catch((error) => null);
     }
-    this.state.prevState = state;
-    
+    this.state.prevState = state; 
+  }
+  loadData(callback){
+    axios.get("/load")
+    .then((data) => callback(null, data))
+    .catch((error) => callback(error));
   }
 }
 

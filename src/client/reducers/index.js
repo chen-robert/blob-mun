@@ -1,8 +1,9 @@
 import applyToState, {rooms} from "./applyToState";
+import uuid from "utils/uuid";
 
 const initialState = {
   generic: {
-    id: "LOL",
+    id: uuid.generate(),
     delegates: [],
     present: {},
     committeeName: "Blob Mun",
@@ -30,9 +31,12 @@ for(var i = 0; i < 10; i++){
 rooms.forEach((name) => {
   initialState.generic[name] = {...initialState.generic.genericRoom}
 });
-
 initialState.allStates[initialState.generic.id] = {...initialState.generic};
+
 const reducer = (state = initialState, action) => {
+  if(action.type === "LOAD_SERVER_STATE"){
+    return action.data;
+  }
   //Required an id for all actions
   if(action.id === undefined)return state;
   

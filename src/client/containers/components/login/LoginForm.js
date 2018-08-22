@@ -23,7 +23,7 @@ class LoginForm extends Component{
           .then((res) => {
             redirect();
           })
-          .catch((err) => popup(err.data, false));
+          .catch((err) => popup(err.response.data, false));
       }
     }>
         <div>
@@ -31,7 +31,7 @@ class LoginForm extends Component{
           onChange={(e) => this.setState({username: e.target.value})}/>
         </div>
         <div>
-          <TextField fullWidth required name="password" label="Password" placeholder="Password"
+          <TextField fullWidth required type="password" name="password" label="Password" placeholder="Password"
           onChange={(e) => this.setState({password: e.target.value})}/>
         </div>
         <div style={{height: "10px"}}/>

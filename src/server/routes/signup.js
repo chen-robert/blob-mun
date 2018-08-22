@@ -1,5 +1,5 @@
 import Joi from "joi";
-import Validator from "server/db/users";
+import {addUser} from "server/db";
 
 const signUpSchema = Joi.object({
   username: Joi.string().required(),
@@ -14,11 +14,11 @@ const signupRoute = (req, res) => {
     return res.status(400).end(ret.error.toString());
   }
   const data = ret.value;
-  Validator.addUser(data.username, data.email, data.password, (error, data) => {
+  addUser(data.username, data.email, data.password, (error, data) => {
     if(error){
       return res.status(400).end(error);
     }
-    return res.send("Signup Successful");
+    return res.end("Signup Successful");
   });
 }
 

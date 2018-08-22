@@ -1,5 +1,5 @@
 import Joi from "joi";
-import Validator from "server/db/users";
+import {checkLogin} from "server/db";
 import SessionManager from "server/users/SessionManager";
 
 const userSchema = Joi.object({
@@ -14,7 +14,7 @@ const loginRoute = (req, res) => {
     return res.status(400).end(ret.error.toString());
   }
   const data = ret.value;
-  Validator.checkLogin(data.username, data.password, (error, data) => {
+  checkLogin(data.username, data.password, (error, data) => {
     if(error){
       return res.status(400).end(error);
     }

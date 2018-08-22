@@ -1,15 +1,16 @@
 import Joi from "joi";
 
-import stateSaver from "server/db/saveState";
+import {saveState} from "server/db";
 import SessionManager from "server/users/SessionManager";
 
 const saveStateSchema = Joi.object({
-  sessId: Joi.number().required(),
+  sessId: Joi.string().required(),
   state: Joi.string().required(),
 });
 
 const saveStateRoute = (req, res) => {
-  const combined = Object.assign({}, req.cookies, req.body);
+  const {sessId} = req.cookies;
+  const combined = Object.assign({}, {sessId}, req.body);
   const ret = Joi.validate(combined, saveStateSchema, {allowUnknown: false});
   
   if(ret.error){
@@ -17,18 +18,13 @@ const saveStateRoute = (req, res) => {
   }
   const data = ret.value;
   const id = SessionManager.getIdFromSess(data.sessId);
-  
-  if(id){
-    stateSaver.saveState(id, data.state, (error, data) => {
-      if(error)return res.status(400).end(error);
-      
-      return res.send("Signup Successful");
-    });
+
+  saveState(id, data.state, (error, data) => {
+    if(error)return res.status(400).end(error);
     
-  }else{
-    return res.status(400).end("Invalid Session");
-  }
-  
+    return res.send("Saved");
+  });
+      
 }
 
 export default saveStateRoute;

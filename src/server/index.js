@@ -6,6 +6,8 @@ import compression from "compression";
 import loginRoute from "./routes/login";
 import signupRoute from "./routes/signup";
 import saveRoute from "./routes/saveState";
+import loadRoute from "./routes/load";
+import requireAuth from "./routes/requireAuth";
 
 const PORT = process.env.PORT || 3000;
 
@@ -20,16 +22,17 @@ app.use(express.urlencoded({
 
 app.post("/login", loginRoute);
 app.post("/signup", signupRoute);
-app.post("/save", saveRoute);
+app.post("/save", requireAuth(false), saveRoute);
+app.get("/load", requireAuth(false), loadRoute);
 
 
 app.get("/login", (req, res) => {
   res.sendFile(path.join(global.__rootdir, "dist/index.html"));
 });
-app.get("/dashboard", (req, res) => {
+app.get("/dashboard", requireAuth(true), (req, res) => {
   res.sendFile(path.join(global.__rootdir, "dist/index.html"));
 });
-app.get("/committee/*", (req, res) => {
+app.get("/committee/*", requireAuth(true), (req, res) => {
   res.sendFile(path.join(global.__rootdir, "dist/index.html"));
 });
 
