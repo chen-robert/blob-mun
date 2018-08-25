@@ -1,11 +1,12 @@
 # blob-mun
 
 ## Setup
+You will need a Postgres database.
 ```
 npm install
+npm run db:init
 npm start
 ```
-You'll also need a Postgres instance. 
 
 ### Environmental Variables
 | Name         | Meaning                                         |
