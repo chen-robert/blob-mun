@@ -6,7 +6,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "webpack-dev-server",
-    "build": "webpack --config webpack.production.config.js --progress",
+    "build": "webpack --mode=production --progress",
     "build-watch": "webpack --watch --progress",
     "server": "nodemon --exec babel-node app.js --watch src/server",
     "db:init": "babel-node src/server/db/init",
