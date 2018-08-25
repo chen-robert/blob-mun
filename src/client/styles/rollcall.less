@@ -4,65 +4,66 @@
 
 @small-padding: 5px;
 
-.centered{  
+.centered {
   display: inline-block;
 }
-.centered-parent{
+.centered-parent {
   text-align: center;
 }
-.table-container{
+.table-container {
   max-height: 50vh;
   overflow-y: auto;
 }
-.table{  
-  & th, td{
+.table {
+  & th,
+  td {
     width: 33%;
   }
   cursor: pointer;
 }
 
-.table thead th{
+.table thead th {
   border-bottom: 1px solid @nice-gray;
-  
+
   padding: @small-padding;
 }
 
-.table tbody tr{
-  & td:nth-child(1){
+.table tbody tr {
+  & td:nth-child(1) {
     background-color: white;
   }
-  & td{
+  & td {
     height: @row-height;
     padding: @small-padding;
-    
+
     background-color: @light-gray;
-    
+
     transition: 150ms background-color;
   }
-  & .toggled{
+  & .toggled {
     background-color: @nice-blue !important;
   }
-  &:hover{
-    & td{
+  &:hover {
+    & td {
       background-color: @hover-nice-blue;
     }
   }
-  & td:hover ~ td{
+  & td:hover ~ td {
     background-color: @nice-gray;
   }
-  
-  & td:not(td:nth-child(1)):hover{
+
+  & td:not(td:nth-child(1)):hover {
     background-color: @hover-nice-blue !important;
   }
-  
-  &:hover td:nth-child(1){
+
+  &:hover td:nth-child(1) {
     background-color: @nice-gray;
   }
-  & td:nth-child(1):hover{
+  & td:nth-child(1):hover {
     background-color: @nice-gray;
-    
-    &.hover-red{
-      background-color: @nice-red;    
+
+    &.hover-red {
+      background-color: @nice-red;
     }
-  } 
+  }
 }

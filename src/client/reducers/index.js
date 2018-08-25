@@ -1,16 +1,16 @@
-import applyToState, {rooms} from "./applyToState";
+import applyToState, { rooms } from "./applyToState";
 import uuid from "utils/uuid";
 
 const generateId = () => uuid.generate();
-const generateState = (name) => {  
+const generateState = name => {
   const newState = {
-    ...initialState.generic, 
+    ...initialState.generic,
     committeeName: name,
     id: generateId()
-  }
-  
+  };
+
   return newState;
-}
+};
 const initialState = {
   generic: {
     delegates: [],
@@ -32,38 +32,41 @@ const initialState = {
   },
   allStates: {}
 };
-rooms.forEach((name) => {
-  initialState.generic[name] = {...initialState.generic.genericRoom}
+rooms.forEach(name => {
+  initialState.generic[name] = { ...initialState.generic.genericRoom };
 });
 
 const newState = generateState("Blober Mun");
 initialState.allStates[newState.id] = newState;
 
 const reducer = (state = initialState, action) => {
-  switch(action.type){
+  switch (action.type) {
     case "LOAD_SERVER_STATE":
       return action.data;
     case "CREATE_NEW_STATE":
       const newState = generateState(action.name);
-      
-      return {...state,
-        allStates: {...state.allStates,
-          [newState.id]: newState          
+
+      return {
+        ...state,
+        allStates: {
+          ...state.allStates,
+          [newState.id]: newState
         }
-      }    
+      };
   }
   //Required an id for all actions
-  if(action.id === undefined)return state;
-  
+  if (action.id === undefined) return state;
+
   const newState = applyToState(state.allStates[action.id], action);
   newState.delegates.sort((a, b) => a.toLowerCase() > b.toLowerCase());
-  
-  return {...state, 
-    allStates: {...state.allStates,    
+
+  return {
+    ...state,
+    allStates: {
+      ...state.allStates,
       [action.id]: newState
     }
-  }
+  };
 };
-
 
 export default reducer;

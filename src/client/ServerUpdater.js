@@ -1,25 +1,27 @@
 import axios from "axios";
 
-class ServerUpdater{
-  constructor(){
+class ServerUpdater {
+  constructor() {
     this.state = {
       prevState: {}
-    }
+    };
   }
-  updateServer(state){
-    if(this.state.prevState !== state){
-      axios.post("/save", {
-        state: JSON.stringify(state)
-      })
-      .then(() => console.log("Saved"))
-      .catch((error) => null);
+  updateServer(state) {
+    if (this.state.prevState !== state) {
+      axios
+        .post("/save", {
+          state: JSON.stringify(state)
+        })
+        .then(() => console.log("Saved"))
+        .catch(error => null);
     }
-    this.state.prevState = state; 
+    this.state.prevState = state;
   }
-  loadData(callback){
-    axios.get("/load")
-    .then((data) => callback(null, data.data))
-    .catch((error) => callback(error));
+  loadData(callback) {
+    axios
+      .get("/load")
+      .then(data => callback(null, data.data))
+      .catch(error => callback(error));
   }
 }
 

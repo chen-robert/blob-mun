@@ -15,126 +15,128 @@
 
 @button-padding: 5px;
 
-html, body{  
+html,
+body {
   height: 100%;
   width: 100%;
   overflow: hidden;
   user-select: none;
-  
+
   margin: 0;
-  
+
   background-color: #eee;
-  
+
   font-family: "Roboto";
 }
-#app{
+#app {
   height: 100%;
 }
 
-#header{
+#header {
   width: 100%;
   height: @header-height;
-  
+
   position: absolute;
   top: 0;
   left: 0;
-  
+
   background-color: white;
 }
 
-#committee-name{
+#committee-name {
   text-align: center;
-  
+
   height: calc(@header-height - @banner-height);
   padding-top: @committee-padding;
   margin: 0;
-  
+
   background-color: white;
-  &:hover{
+  &:hover {
     background-color: darken(white, @small-shade);
   }
-  & h3{
+  & h3 {
     margin: 0;
   }
 }
 
-#session-name{
+#session-name {
   text-align: center;
   background-color: @shaded-blue;
   color: white;
-  
+
   font-size: 1.5em;
-  
+
   height: @banner-height;
   line-height: @banner-height;
-  
+
   position: absolute;
   bottom: 0;
   width: 100%;
 }
 
-#main-content{
+#main-content {
   transition-duration: @transition-duration;
   height: 100%;
 
-  &.collapsed{
+  &.collapsed {
     transform: translateX(calc(-@sidebar-width));
   }
 }
 
-.sidebar-button{
+.sidebar-button {
   position: absolute;
   top: @button-padding;
-  
-  &.left{
+
+  &.left {
     left: @button-padding;
   }
-  &.right{
+  &.right {
     right: @button-padding;
   }
 }
 
-.header-padding{
+.header-padding {
   height: @header-height;
 }
 
-.content-banner{
+.content-banner {
   position: absolute;
   top: 0;
   left: 0;
-  
+
   background-color: @light-blue;
-  
+
   width: 100vw;
-  
+
   color: white;
-  
+
   font-size: 1.3em;
   padding: 5px;
-  
-  &:hover{
+
+  &:hover {
     background-color: darken(@light-blue, @small-shade);
   }
 }
 
-.content, .content-parent{
+.content,
+.content-parent {
   position: inherit;
 }
 
-.centered-parent{
+.centered-parent {
   padding-top: @spacing;
   position: relative;
 }
 
-.hidden{
+.hidden {
   display: none;
 }
 
-.ontop > div{
+.ontop > div {
   z-index: 1000;
 }
 
-.fab-button{
+.fab-button {
   position: absolute;
   right: -15px;
   bottom: -15px;

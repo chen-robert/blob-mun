@@ -1,8 +1,8 @@
-import {Client} from "pg";
+import { Client } from "pg";
 import async from "async";
-import {connectionString} from "./config";
+import { connectionString } from "./config";
 
-const client = new Client({connectionString});
+const client = new Client({ connectionString });
 client.connect();
 
 const queries = [
@@ -12,15 +12,16 @@ const queries = [
   "CREATE TABLE data(user_id INTEGER UNIQUE PRIMARY KEY, data character varying not null)"
 ];
 
-async.each(queries, 
+async.each(
+  queries,
   (query, callback) => {
     client.query(query, (err, res) => {
-      console.log(err? err.stack: res.command);
+      console.log(err ? err.stack : res.command);
       callback();
-    })
+    });
   },
-  (err) => {
-    if(err) console.log(err);
+  err => {
+    if (err) console.log(err);
     client.end();
   }
 );

@@ -4,32 +4,32 @@ export const addDelegate = (name, id) => {
     type: "ADD_DELEGATE",
     name,
     id
-  }
-}
+  };
+};
 
 export const setPresent = (name, status, id) => {
   return {
     type: "PRESENT_STATUS",
     name,
     status,
-    id    
-  }
-}
+    id
+  };
+};
 
 export const toggleCollapse = (value, id) => {
   return {
     type: "TOGGLE_COLLAPSE",
     value,
     id
-  }
-}
+  };
+};
 export const setSession = (session, id) => {
   return {
     type: "SET_SESSION",
     session,
     id
-  }
-}
+  };
+};
 
 export const changeSessionData = (name, delta, id) => {
   return {
@@ -37,8 +37,8 @@ export const changeSessionData = (name, delta, id) => {
     name,
     delta,
     id
-  }
-}
+  };
+};
 
 export const updateItem = (item, delta, id) => {
   return {
@@ -46,35 +46,35 @@ export const updateItem = (item, delta, id) => {
     item,
     delta,
     id
-  }
-}
+  };
+};
 
 export const removeDelegate = (name, id) => {
   return {
     type: "REMOVE_DELEGATE",
     name,
     id
-  }
-}
+  };
+};
 
 export const setCommitteeName = (name, id) => {
   return {
     type: "SET_COMMITTEE_NAME",
     name,
     id
-  }
-}
+  };
+};
 
-export const clearSpeakingData = (id) => {
+export const clearSpeakingData = id => {
   return {
     type: "CLEAR_SPEAKING_DATA",
     id
-  }
-}
+  };
+};
 
-export const createNewState = (name) => {
+export const createNewState = name => {
   return {
     type: "CREATE_NEW_STATE",
     name
-  }
-}
+  };
+};

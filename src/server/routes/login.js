@@ -1,5 +1,5 @@
 import Joi from "joi";
-import {checkLogin} from "server/db";
+import { checkLogin } from "server/db";
 import SessionManager from "server/users/SessionManager";
 
 const userSchema = Joi.object({
@@ -8,22 +8,21 @@ const userSchema = Joi.object({
 });
 
 const loginRoute = (req, res) => {
-  const ret = Joi.validate(req.body, userSchema, {allowUnknown: false});
-  
-  if(ret.error){
+  const ret = Joi.validate(req.body, userSchema, { allowUnknown: false });
+
+  if (ret.error) {
     return res.status(400).end(ret.error.toString());
   }
   const data = ret.value;
   checkLogin(data.username, data.password, (error, data) => {
-    if(error){
+    if (error) {
       return res.status(400).end(error);
     }
     const sessId = SessionManager.generateSessId(data.id);
-    
-    res.cookie("sessId", sessId, {maxAge: 9e6, httpOnly: true});
+
+    res.cookie("sessId", sessId, { maxAge: 9e6, httpOnly: true });
     return res.send("Login Successful");
   });
-  
-}
+};
 
 export default loginRoute;

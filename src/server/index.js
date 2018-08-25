@@ -16,16 +16,17 @@ const app = express();
 app.use(compression());
 app.use(express.json());
 app.use(cookieParser());
-app.use(express.urlencoded({
-  extended: true
-}));
+app.use(
+  express.urlencoded({
+    extended: true
+  })
+);
 
 app.post("/login", loginRoute);
 app.post("/signup", signupRoute);
 app.get("/signedin", requireAuth(false), (req, res) => res.end());
 app.post("/save", requireAuth(false), saveRoute);
 app.get("/load", requireAuth(false), loadRoute);
-
 
 app.get("/login", (req, res) => {
   res.sendFile(path.join(global.__rootdir, "dist/index.html"));
