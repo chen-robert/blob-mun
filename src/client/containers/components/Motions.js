@@ -93,39 +93,35 @@ class Motions extends Component{
         />
       </div>
       <div style={{position: "relative"}}>
-        <Button 
-        style={{
-          position: "absolute",
-          right: "-15px",
-          bottom: "-15px"
-          
-        }}
-        onClick={
-          () => {
-            const stateData = {
-              timer: 0,
-              speakingTimer: 0,
-              speakingTotal: speakingTime || 1 * 60,
-              total: duration || 10 * 60,
-              paused: true,
-              currentSpeaker: delegation || delegations[0],
-              topic: topic.trim()
-            }
-            switch(sessionType){
-              case "mod":
-                changeState("moderated", stateData);
-                this.props.setSession("Moderated Caucus");
-                break;
-              case "unmod":
-                changeState("unmoderated", stateData);
-                this.props.setSession("Unmoderated Caucus");
-                break;
+        <div className="fab-button">
+          <Button 
+          onClick={
+            () => {
+              const stateData = {
+                timer: 0,
+                speakingTimer: 0,
+                speakingTotal: speakingTime || 1 * 60,
+                total: duration || 10 * 60,
+                paused: true,
+                currentSpeaker: delegation || delegations[0],
+                topic: topic.trim()
+              }
+              switch(sessionType){
+                case "mod":
+                  changeState("moderated", stateData);
+                  this.props.setSession("Moderated Caucus");
+                  break;
+                case "unmod":
+                  changeState("unmoderated", stateData);
+                  this.props.setSession("Unmoderated Caucus");
+                  break;
+              }
             }
           }
-        }
-        variant="fab" color="primary" aria-label="Add">
-          <AddIcon />
-        </Button>
+          variant="fab" color="primary" aria-label="Add">
+            <AddIcon />
+          </Button>
+        </div>
       </div>
     </div>
   }

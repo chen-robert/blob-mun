@@ -22,6 +22,7 @@ app.use(express.urlencoded({
 
 app.post("/login", loginRoute);
 app.post("/signup", signupRoute);
+app.get("/signedin", requireAuth(false), (req, res) => res.end());
 app.post("/save", requireAuth(false), saveRoute);
 app.get("/load", requireAuth(false), loadRoute);
 

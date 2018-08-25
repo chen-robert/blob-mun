@@ -71,3 +71,10 @@ export const clearSpeakingData = (id) => {
     id
   }
 }
+
+export const createNewState = (name) => {
+  return {
+    type: "CREATE_NEW_STATE",
+    name
+  }
+}

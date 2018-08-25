@@ -20,7 +20,7 @@ const loginRoute = (req, res) => {
     }
     const sessId = SessionManager.generateSessId(data.id);
     
-    res.cookie("sessId", sessId, {maxAge: 9e5, httpOnly: true});
+    res.cookie("sessId", sessId, {maxAge: 9e6, httpOnly: true});
     return res.send("Login Successful");
   });
   

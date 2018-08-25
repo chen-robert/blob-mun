@@ -9,7 +9,7 @@
 @import "pie";
 
 @banner-height: @link-height;
-@header-height: 120px;
+@header-height: 140px;
 @committee-padding: 25px;
 @spacing: 50px;
 
@@ -19,6 +19,7 @@ html, body{
   height: 100%;
   width: 100%;
   overflow: hidden;
+  user-select: none;
   
   margin: 0;
   
@@ -131,4 +132,10 @@ html, body{
 
 .ontop > div{
   z-index: 1000;
+}
+
+.fab-button{
+  position: absolute;
+  right: -15px;
+  bottom: -15px;
 }

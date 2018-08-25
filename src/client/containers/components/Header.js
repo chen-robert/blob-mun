@@ -1,9 +1,10 @@
 import React from "react";
 import {connect} from "react-redux";
 import {withRouter} from "react-router";
+import {Typography} from "@material-ui/core";
 import HeadCount from "./HeadCount";
 
-const Header = ({committeeName, sessionName, setCommitteeName}) => {
+const Header = ({committeeName, sessionName, setCommitteeName, headCount}) => {
   return <div id="header">
     <div
     id="committee-name"
@@ -16,8 +17,8 @@ const Header = ({committeeName, sessionName, setCommitteeName}) => {
       }
     }
     >
-      <h3>{committeeName}</h3>
-      <HeadCount count={12}/>
+      <Typography variant="headline" component="h3">{committeeName}</Typography>
+      <HeadCount count={headCount}/>
     </div>
     
     <div id="session-name">

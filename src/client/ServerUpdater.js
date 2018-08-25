@@ -18,7 +18,7 @@ class ServerUpdater{
   }
   loadData(callback){
     axios.get("/load")
-    .then((data) => callback(null, data))
+    .then((data) => callback(null, data.data))
     .catch((error) => callback(error));
   }
 }

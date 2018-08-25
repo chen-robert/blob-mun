@@ -26,16 +26,3 @@ render();
 store.subscribe(render);
 
 setInterval(() => ServerUpdater.updateServer(store.getState()), 10 * 1000);
-
-//Load until we get a valid result
-const loadInterval = setInterval(() => ServerUpdater.loadData((err, data) => {
-  if(err)return;
-  
-  if(data.data){
-    store.dispatch({
-      type: "LOAD_SERVER_STATE",
-      data: data.data
-    });
-  }
-  clearInterval(loadInterval);
-}), 1000);

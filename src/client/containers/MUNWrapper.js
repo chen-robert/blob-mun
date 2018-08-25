@@ -1,5 +1,6 @@
 import React from "react";
 import {connect} from "react-redux";
+import ForceSignin from "./components/ForceSignin";
 
 import {Card, CardContent, Typography, Grid} from "@material-ui/core";
 
@@ -15,6 +16,7 @@ const MUNWrapper = ({currStateDefined}) => {
     justify="center"
     alignItems="center"
   >
+    <ForceSignin/>
     <Card style={{maxWidth: "50vw"}}>
       <CardContent>
         <Typography gutterBottom variant="headline" component="h2">

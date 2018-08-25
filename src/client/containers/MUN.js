@@ -17,7 +17,7 @@ const allowOverflow = {
 }
 
 const MUN = ({currState, toggleCollapse, setCommitteeName, setSession, clearSpeakingData}) => {
-  const {collapsed, sessionName, committeeName, speakingStats} = currState;
+  const {collapsed, sessionName, committeeName, speakingStats, delegates} = currState;
   const nameToJSX = {
     "Roll Call": <RollCall/>,
     "Motions": <Motions/>,
@@ -41,6 +41,7 @@ const MUN = ({currState, toggleCollapse, setCommitteeName, setSession, clearSpea
         committeeName={committeeName}
         sessionName={sessionName}
         setCommitteeName={setCommitteeName}
+        headCount={delegates.length}
       />
       <div className="header-padding" />
       <div className="centered-parent">

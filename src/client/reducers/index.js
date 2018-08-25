@@ -1,9 +1,18 @@
 import applyToState, {rooms} from "./applyToState";
 import uuid from "utils/uuid";
 
+const generateId = () => uuid.generate();
+const generateState = (name) => {  
+  const newState = {
+    ...initialState.generic, 
+    committeeName: name,
+    id: generateId()
+  }
+  
+  return newState;
+}
 const initialState = {
   generic: {
-    id: uuid.generate(),
     delegates: [],
     present: {},
     committeeName: "Blob Mun",
@@ -23,19 +32,25 @@ const initialState = {
   },
   allStates: {}
 };
-for(var i = 0; i < 10; i++){
-  const ret = {};
-  rooms.forEach((room) => ret[room] = 10 ** Math.random());
-  initialState.generic.speakingStats["Bob" + i] = ret;
-}
 rooms.forEach((name) => {
   initialState.generic[name] = {...initialState.generic.genericRoom}
 });
-initialState.allStates[initialState.generic.id] = {...initialState.generic};
+
+const newState = generateState("Blober Mun");
+initialState.allStates[newState.id] = newState;
 
 const reducer = (state = initialState, action) => {
-  if(action.type === "LOAD_SERVER_STATE"){
-    return action.data;
+  switch(action.type){
+    case "LOAD_SERVER_STATE":
+      return action.data;
+    case "CREATE_NEW_STATE":
+      const newState = generateState(action.name);
+      
+      return {...state,
+        allStates: {...state.allStates,
+          [newState.id]: newState          
+        }
+      }    
   }
   //Required an id for all actions
   if(action.id === undefined)return state;

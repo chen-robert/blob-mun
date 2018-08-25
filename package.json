@@ -5,9 +5,9 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "webpack-dev-server",
-    "build": "webpack --mode=production --progress",
-    "build-watch": "webpack --watch --progress",
+    "dev": "webpack-dev-server --open",
+    "build": "webpack --mode production --progress",
+    "build-watch": "webpack --devtool source-map --watch --progress",
     "server": "nodemon --exec babel-node app.js --watch src/server",
     "db:init": "babel-node src/server/db/init",
     "start": "run-s build server"
@@ -37,6 +37,7 @@
     "redux": "^4.0.0",
     "typeface-roboto": "0.0.54",
     "webpack": "^4.16.5",
+    "webpack-bundle-analyzer": "^2.13.1",
     "webpack-cli": "^3.1.0",
     "webpack-dev-server": "^3.1.5"
   },
