@@ -40,7 +40,6 @@ export const addUser = (name, email, password, callback) => {
       });
     });
   });
-  callback();
 }
 export const checkLogin = (name, password, callback) => {
   client.query("SELECT * FROM users WHERE username = $1", [name], (err, res) => {
