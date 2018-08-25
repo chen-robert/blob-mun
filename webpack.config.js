@@ -1,9 +1,8 @@
 const webpack = require("webpack");
 const path = require("path");
-
+ 
 module.exports = {
   mode: "development",
-  devtool: "inline-source-map",
   entry: [
     path.join(__dirname, "/src/client/index.js")
   ],
@@ -35,6 +34,5 @@ module.exports = {
     contentBase: __dirname + '/dist',
     historyApiFallback: true,
     stats: "minimal"
-  }
-  
+  }  
 }
