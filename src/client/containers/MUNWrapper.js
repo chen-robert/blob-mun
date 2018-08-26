@@ -29,16 +29,12 @@ const MUNWrapper = ({ currStateDefined, history }) => {
         </Card>
       </Grid>
     );
-  }
+  };
   return (
-  <div>
-    <ForceSignin
-      history={history}
-    />
-    {
-      getContent()
-    }
-  </div>
+    <div>
+      <ForceSignin history={history} />
+      {getContent()}
+    </div>
   );
 };
 const MUNWrapperConnector = connect((state, ownProps) => ({
