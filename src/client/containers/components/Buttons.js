@@ -1,10 +1,7 @@
 import React from "react";
-import { connect } from "react-redux";
-import { withRouter } from "react-router";
-import { toggleCollapse } from "client/actions";
 import { Button, Icon } from "@material-ui/core";
 
-const Buttons = ({ toggleCollapse }) => {
+const Buttons = ({ toggleCollapse, save }) => {
   return (
     <div>
       <div className="sidebar-button left">
@@ -12,12 +9,11 @@ const Buttons = ({ toggleCollapse }) => {
           variant="fab"
           color="primary"
           aria-label="Menu"
-          onClick={e => {
-            toggleCollapse();
-            e.stopPropagation();
+          onClick={() => {
+            save();
           }}
         >
-          <Icon>settings</Icon>
+          <Icon>save</Icon>
         </Button>
       </div>
       <div className="sidebar-button right">

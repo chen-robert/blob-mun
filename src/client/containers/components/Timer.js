@@ -1,8 +1,6 @@
-import React, { Component } from "react";
+import React from "react";
 
 import { LinearProgress } from "@material-ui/core";
-
-import { connect } from "react-redux";
 
 const Timer = ({ elapsedTime, total }) => {
   const totalMillis = total * 1000;

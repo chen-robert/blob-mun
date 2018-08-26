@@ -21,7 +21,7 @@ class LoginForm extends Component {
 
           axios
             .post("/login", this.state)
-            .then(res => {
+            .then(() => {
               redirect();
             })
             .catch(err => popup(err.response.data, false));

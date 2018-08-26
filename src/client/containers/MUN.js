@@ -1,6 +1,6 @@
 import React from "react";
 import classNames from "classnames";
-import { Grid, Card, CardContent } from "@material-ui/core";
+import { Card, CardContent } from "@material-ui/core";
 import { connect } from "react-redux";
 import { withRouter } from "react-router";
 import {
@@ -88,7 +88,12 @@ const MUN = ({
           setSession={setSession}
         />
       </div>
-      <Buttons toggleCollapse={() => toggleCollapse()} />
+      <Buttons
+        toggleCollapse={() => toggleCollapse()}
+        save={() => {
+          /*Placebo effect*/
+        }}
+      />
     </div>
   );
 };

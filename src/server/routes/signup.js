@@ -16,7 +16,7 @@ const signupRoute = (req, res) => {
     return res.status(400).end(ret.error.toString());
   }
   const data = ret.value;
-  addUser(data.username, data.email, data.password, (error, data) => {
+  addUser(data.username, data.email, data.password, error => {
     if (error) {
       return res.status(400).end(error);
     }

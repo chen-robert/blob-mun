@@ -13,7 +13,7 @@ class ServerUpdater {
           state: JSON.stringify(state)
         })
         .then(() => console.log("Saved"))
-        .catch(error => null);
+        .catch(() => null);
     }
     this.state.prevState = state;
   }

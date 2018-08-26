@@ -19,7 +19,7 @@ const saveStateRoute = (req, res) => {
   const data = ret.value;
   const id = SessionManager.getIdFromSess(data.sessId);
 
-  saveState(id, data.state, (error, data) => {
+  saveState(id, data.state, error => {
     if (error) return res.status(400).end(error);
 
     return res.send("Saved");

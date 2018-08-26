@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import Select from "react-select";
-import classNames from "classnames";
 import DraggableList from "react-draggable-list";
 import { withRouter } from "react-router";
 
@@ -10,7 +9,6 @@ import Icon from "@material-ui/core/Icon";
 
 import { changeSessionData, updateItem } from "client/actions";
 import DraggableListItem from "./DraggableListItem";
-import DelegateTable from "./DelegateTable";
 import DateUtils from "utils/date";
 import Timer from "./Timer";
 

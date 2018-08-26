@@ -5,9 +5,7 @@ import {
   Toolbar,
   Icon,
   Grid,
-  Card,
   CardContent,
-  CardActions,
   Typography,
   Button
 } from "@material-ui/core";

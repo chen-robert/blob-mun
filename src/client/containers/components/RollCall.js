@@ -8,10 +8,8 @@ import {
   TextField,
   FormGroup,
   FormControlLabel,
-  Switch,
-  Button
+  Switch
 } from "@material-ui/core";
-import AddIcon from "@material-ui/icons/Add";
 
 import { setPresent, removeDelegate, addDelegate } from "client/actions";
 

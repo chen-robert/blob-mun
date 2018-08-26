@@ -1,11 +1,6 @@
 import React, { Component } from "react";
-import { withRouter } from "react-router";
-import classNames from "classnames";
-import { connect } from "react-redux";
 
-import { Card, CardContent } from "@material-ui/core";
-
-import { updateItem } from "client/actions";
+import { Card } from "@material-ui/core";
 
 class DraggableListItem extends Component {
   constructor(props) {
@@ -18,7 +13,7 @@ class DraggableListItem extends Component {
     return (
       <Card className="draglist-item">
         {dragHandle(
-          <div onClick={e => updateItem(item, null)}>
+          <div onClick={() => updateItem(item, null)}>
             <span
               onClick={e => {
                 e.stopPropagation();

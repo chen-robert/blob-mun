@@ -1,10 +1,6 @@
 import React from "react";
 import classNames from "classnames";
-import { withRouter } from "react-router";
-import { connect } from "react-redux";
 import { List, ListItem, ListItemText } from "@material-ui/core";
-
-import { setSession } from "client/actions";
 
 const SideBar = ({ names, currSession, setSession }) => {
   return (
